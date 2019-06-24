@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".activity.DetailActivity"
+    android:padding="16dp">
+
+    <ImageView
+        android:id="@+id/ivImage"
+        android:layout_width="150dp"
+        android:layout_height="175dp"
+        android:scaleType="centerCrop"
+        android:src="@drawable/poster_deadpool"/>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:layout_marginStart="8dp"
+        android:layout_toEndOf="@id/ivImage">
+
+        <TextView
+            android:id="@+id/tvTitle"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/example_title"
+            style="@style/TextAppearance.AppCompat.Title"/>
+
+        <TextView
+            android:id="@+id/tvRating"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:drawableStart="@drawable/ic_star_black_24dp"
+            android:text="@string/example_rating"
+            style="@style/TextAppearance.AppCompat.Title"
+            android:drawableTint="@android:color/holo_orange_light"
+            android:textAlignment="center"/>
+
+    </LinearLayout>
+
+    <TextView
+        android:id="@+id/tvDesc"
+        android:layout_marginTop="16dp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/ivImage"
+        android:textSize="16sp"
+        android:textColor="@android:color/black"
+        android:lineSpacingExtra="4dp"
+        android:text="@string/example_desc"/>
+
+</RelativeLayout>

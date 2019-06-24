@@ -1,0 +1,64 @@
+<resources>
+    <string name="app_name">DaftarFilm</string>
+    <string name="example_desc">A musician helps a young singer find fame as age and alcoholism send his own career into
+        a downward spiral.
+    </string>
+    <string name="example_rating">4</string>
+    <string name="example_title">Title</string>
+
+    <string-array name="data_title">
+        <item>A Star</item>
+        <item>Aquaman</item>
+        <item>Avenger Infinity</item>
+        <item>Bird Box</item>
+        <item>Bohemian</item>
+        <item>Bumblebee</item>
+        <item>Creed II</item>
+        <item>Deadpool</item>
+        <item>How To Train Your Dragon III</item>
+        <item>Dragon Ball Super: Broly</item>
+        <item>Glass</item>
+    </string-array>
+
+    <integer-array name="data_rating">
+        <item>7</item>
+        <item>7</item>
+        <item>8</item>
+        <item>6</item>
+        <item>8</item>
+        <item>7</item>
+        <item>7</item>
+        <item>7</item>
+        <item>7</item>
+        <item>8</item>
+        <item>7</item>
+    </integer-array>
+
+    <string-array name="data_desc">
+        <item>A musician helps a young singer find fame as age and alcoholism send his own career into a downward spiral.</item>
+        <item>Arthur Curry, the human-born heir to the underwater kingdom of Atlantis, goes on a quest to prevent a war between the worlds of ocean and land.</item>
+        <item>The Avengers and their allies must be willing to sacrifice all in an attempt to defeat the powerful Thanos before his blitz of devastation and ruin puts an end to the universe.</item>
+        <item>Five years after an ominous unseen presence drives most of society to suicide, a mother and her two children make a desperate bid to reach safety.</item>
+        <item>The story of the legendary rock band Queen and lead singer Freddie Mercury, leading up to their famous performance at Live Aid (1985).</item>
+        <item>On the run in the year 1987, Bumblebee finds refuge in a junkyard in a small California beach town. On the cusp of turning 18 and trying to find her place in the world, Charlie Watson discovers Bumblebee, battle-scarred and broken.</item>
+        <item>Under the tutelage of Rocky Balboa, newly crowned heavyweight champion Adonis Creed faces off against Viktor Drago, the son of Ivan Drago.</item>
+        <item>Foul-mouthed mutant mercenary Wade Wilson (AKA. Deadpool), brings together a team of fellow mutant rogues to protect a young boy with supernatural abilities from the brutal, time-traveling cyborg, Cable.</item>
+        <item>When Hiccup discovers Toothless isn\'t the only Night Fury, he must seek The Hidden World, a secret Dragon Utopia before a hired tyrant named Grimmel finds it first.</item>
+        <item>Goku and Vegeta encounter Broly, a Saiyan warrior unlike any fighter they\'ve faced before.</item>
+        <item>Security guard David Dunn uses his supernatural abilities to track Kevin Wendell Crumb, a disturbed man who has twenty-four personalities.</item>
+    </string-array>
+
+    <array name="data_image">
+        <item>@drawable/poster_a_star</item>
+        <item>@drawable/poster_aquaman</item>
+        <item>@drawable/poster_avengerinfinity</item>
+        <item>@drawable/poster_birdbox</item>
+        <item>@drawable/poster_bohemian</item>
+        <item>@drawable/poster_bumblebee</item>
+        <item>@drawable/poster_creed</item>
+        <item>@drawable/poster_deadpool</item>
+        <item>@drawable/poster_dragon</item>
+        <item>@drawable/poster_dragonball</item>
+        <item>@drawable/poster_glass</item>
+    </array>
+</resources>

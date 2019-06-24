@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_margin="8dp"
+    android:padding="8dp">
+
+    <ImageView
+        android:id="@+id/ivImage"
+        android:layout_width="100dp"
+        android:layout_height="125dp"
+        android:scaleType="centerCrop"
+        android:src="@mipmap/ic_launcher"/>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="125dp"
+        android:orientation="vertical"
+        android:layout_toEndOf="@id/ivImage"
+        android:paddingStart="16dp">
+
+        <TextView
+            android:id="@+id/tvTitle"
+            android:layout_width="wrap_content"
+            android:layout_height="0dp"
+            android:layout_weight="0.5"
+            android:text="@string/example_title"
+            style="@style/TextAppearance.AppCompat.Title" />
+
+        <TextView
+            android:id="@+id/tvRating"
+            android:layout_width="wrap_content"
+            android:layout_height="0dp"
+            android:layout_weight="0.5"
+            android:text="@string/example_rating"
+            android:textSize="20sp"
+            android:textAlignment="center"
+            android:drawableTint="@android:color/holo_orange_light"
+            android:drawableStart="@drawable/ic_star_black_24dp"
+            android:drawablePadding="8dp"
+            style="@style/TextAppearance.AppCompat.Title" />
+
+        <TextView
+            android:id="@+id/tvDesc"
+            android:layout_width="wrap_content"
+            android:layout_height="0dp"
+            android:layout_weight="1"
+            android:maxLines="3"
+            android:ellipsize="end"
+            android:text="@string/example_desc"
+            style="@style/TextAppearance.AppCompat.Body2"/>
+
+    </LinearLayout>
+
+</RelativeLayout>
