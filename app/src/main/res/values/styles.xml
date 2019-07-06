@@ -1,11 +1,56 @@
 <resources>
 
     <!-- Base application theme. -->
-    <style name="AppTheme" parent="Theme.AppCompat.Light.DarkActionBar">
-        <!-- Customize your theme here. -->
+    <style name="AppTheme" parent="Theme.AppCompat.Light.NoActionBar">
         <item name="colorPrimary">@color/colorPrimary</item>
         <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
         <item name="colorAccent">@color/colorAccent</item>
+    </style>
+
+    <style name="TextContent" parent="TextAppearance.AppCompat">
+        <item name="android:layout_width">wrap_content</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:layout_marginLeft">@dimen/margin_left</item>
+        <item name="android:layout_marginRight">@dimen/margin_right</item>
+    </style>
+
+    <style name="TextContent.Title">
+        <item name="android:textSize">@dimen/H6</item>
+    </style>
+
+    <style name="TextContent.SubTitle">
+        <item name="android:textSize">@dimen/Subtitle1</item>
+    </style>
+
+    <style name="TextContent.SubTitle2">
+        <item name="android:textSize">@dimen/Subtitle2</item>
+    </style>
+
+    <style name="TextContent.Desc">
+        <item name="android:lineSpacingExtra">4dp</item>
+        <item name="android:textSize">@dimen/Body1</item>
+    </style>
+
+    <style name="TextContent.Desc.Gray">
+        <item name="android:textColor">@android:color/darker_gray</item>
+    </style>
+
+    <style name="TextContent.SubTitle.Bold">
+        <item name="android:textStyle">bold</item>
+    </style>
+
+    <style name="TextContent.SubTitle.White">
+        <item name="android:textColor">@android:color/white</item>
+    </style>
+
+    <style name="TextContent.Title.White">
+        <item name="android:textColor">@android:color/white</item>
+    </style>
+
+    <style name="MyRatingBar" parent="@style/Widget.AppCompat.RatingBar.Small">
+        <item name="android:progressDrawable">@drawable/custom_rating_bar</item>
+        <item name="android:maxHeight">24dp</item>
+        <item name="android:maxWidth">24dp</item>
     </style>
 
 </resources>

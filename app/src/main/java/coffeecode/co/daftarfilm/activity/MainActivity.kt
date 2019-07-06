@@ -2,61 +2,53 @@ package coffeecode.co.daftarfilm.activity
 
 import android.content.Intent
 import android.os.Bundle
-import android.support.v7.app.AppCompatActivity
-import android.widget.AdapterView
+import android.provider.Settings
+import android.view.Menu
+import android.view.MenuItem
+import androidx.appcompat.app.AppCompatActivity
 import coffeecode.co.daftarfilm.R
-import coffeecode.co.daftarfilm.adapter.DaftarFilmAdapter
-import coffeecode.co.daftarfilm.model.DaftarFilmModel
+import coffeecode.co.daftarfilm.adapter.TabMoviesAdapter
+import coffeecode.co.daftarfilm.fragment.MoviesFragment
+import coffeecode.co.daftarfilm.fragment.TvShowFragment
 import kotlinx.android.synthetic.main.activity_main.*
+import org.jetbrains.anko.startActivity
 
 class MainActivity : AppCompatActivity() {
 
-    private lateinit var daftarFilmAdapter : DaftarFilmAdapter
-    private val listDaftarFilm : MutableList<DaftarFilmModel> = mutableListOf()
+    private lateinit var tabMoviesAdapter: TabMoviesAdapter
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
 
-        setData()
-        setAdapter()
-        onClick()
+        setToolbar()
+        setUpViewPager()
     }
 
-    private fun onClick() {
-        lvDaftarFilm.onItemClickListener = AdapterView.OnItemClickListener { _, _, position, _ ->
-            val intent = Intent(this, DetailActivity::class.java)
-            intent.putExtra(Companion.EXTRA_DAFTAR_FILM, listDaftarFilm[position])
+    private fun setToolbar() {
+        setSupportActionBar(toolBar)
+    }
+
+    override fun onCreateOptionsMenu(menu: Menu?): Boolean {
+        menuInflater.inflate(R.menu.main_menu, menu)
+        return super.onCreateOptionsMenu(menu)
+    }
+
+    override fun onOptionsItemSelected(item: MenuItem): Boolean {
+        if (item.itemId == R.id.action_settings){
+            val intent = Intent(Settings.ACTION_LOCALE_SETTINGS)
             startActivity(intent)
         }
-
+        return super.onOptionsItemSelected(item)
     }
 
-    private fun setAdapter() {
-        daftarFilmAdapter = DaftarFilmAdapter(this)
-        daftarFilmAdapter.setListDaftarFilm(listDaftarFilm)
+    private fun setUpViewPager() {
+        tabMoviesAdapter = TabMoviesAdapter(supportFragmentManager)
+        tabMoviesAdapter.setData(MoviesFragment(), getString(R.string.movies))
+        tabMoviesAdapter.setData(TvShowFragment(), getString(R.string.tv_shows))
 
-        lvDaftarFilm.adapter = daftarFilmAdapter
-    }
+        vpMain.adapter = tabMoviesAdapter
 
-    private fun setData() {
-        val title = resources.getStringArray(R.array.data_title)
-        val desc = resources.getStringArray(R.array.data_desc)
-        val rating = resources.getIntArray(R.array.data_rating)
-        val image = resources.obtainTypedArray(R.array.data_image)
-
-        for (i in title.indices){
-            listDaftarFilm.add(
-                DaftarFilmModel(
-                    title[i],
-                    rating[i],
-                    desc[i],
-                    image.getResourceId(i, -1))
-            )
-        }
-    }
-
-    companion object {
-        const val EXTRA_DAFTAR_FILM = "EXTRA_DAFTAR_FILM"
+        tlMain.setupWithViewPager(vpMain)
     }
 }

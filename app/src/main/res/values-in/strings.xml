@@ -1,8 +1,8 @@
 <resources>
-    <string name="app_name">MovieList</string>
-    <string name="example_desc">A musician helps a young singer find fame as age and alcoholism send his own career into a downward spiral.</string>
+    <string name="app_name">DaftarFilm</string>
+    <string name="example_desc">Seorang musisi membantu seorang penyanyi muda menemukan ketenaran karena usia dan alkoholisme membuat kariernya menurun.</string>
     <string name="example_rating">4</string>
-    <string name="example_title">Title</string>
+    <string name="example_title">Judul</string>
 
     <array name="data_poster">
         <item>@drawable/poster_a_star</item>
@@ -61,17 +61,17 @@
     </string-array>
 
     <string-array name="data_genre">
-        <item>Drama, Music, Romance</item>
-        <item>Action, Adventure, Fantasy</item>
-        <item>Action, Adventure, Sci-Fi</item>
-        <item>Drama, Horror, Sci-Fi</item>
-        <item>Biography, Drama, Music</item>
-        <item>Action, Adventure, Sci-Fi</item>
+        <item>Drama, Musik, Romansa</item>
+        <item>Aksi, Petualangan, Fantasi</item>
+        <item>Aksi, Petualangan, Fiksi Ilmiah</item>
+        <item>Drama, Horor, Fiksi Ilmiah</item>
+        <item>Biografi, Drama, Musik</item>
+        <item>Aksi, Petualangan, Fiksi Ilmiah</item>
         <item>Drama, Sport</item>
-        <item>Action, Adventure, Comedy</item>
-        <item>Animation, Action, Adventure</item>
-        <item>Animation, Action, Adventure</item>
-        <item>Drama, Sci-Fi, Thriller</item>
+        <item>Aksi, Petualangan, Komedi</item>
+        <item>Animasi, Aksi, Petualangan</item>
+        <item>Animasi, Aksi, Petualangan</item>
+        <item>Drama, Fiksi Ilmiah, Thriller</item>
     </string-array>
 
     <string-array name="data_time">
@@ -103,38 +103,17 @@
     </integer-array>
 
     <string-array name="data_desc">
-        <item>A musician helps a young singer find fame as age and alcoholism send his own career into a downward
-            spiral.
-        </item>
-        <item>Arthur Curry, the human-born heir to the underwater kingdom of Atlantis, goes on a quest to prevent a war
-            between the worlds of ocean and land.
-        </item>
-        <item>The Avengers and their allies must be willing to sacrifice all in an attempt to defeat the powerful Thanos
-            before his blitz of devastation and ruin puts an end to the universe.
-        </item>
-        <item>Five years after an ominous unseen presence drives most of society to suicide, a mother and her two
-            children make a desperate bid to reach safety.
-        </item>
-        <item>The story of the legendary rock band Queen and lead singer Freddie Mercury, leading up to their famous
-            performance at Live Aid (1985).
-        </item>
-        <item>On the run in the year 1987, Bumblebee finds refuge in a junkyard in a small California beach town. On the
-            cusp of turning 18 and trying to find her place in the world, Charlie Watson discovers Bumblebee,
-            battle-scarred and broken.
-        </item>
-        <item>Under the tutelage of Rocky Balboa, newly crowned heavyweight champion Adonis Creed faces off against
-            Viktor Drago, the son of Ivan Drago.
-        </item>
-        <item>Foul-mouthed mutant mercenary Wade Wilson (AKA. Deadpool), brings together a team of fellow mutant rogues
-            to protect a young boy with supernatural abilities from the brutal, time-traveling cyborg, Cable.
-        </item>
-        <item>When Hiccup discovers Toothless isn\'t the only Night Fury, he must seek The Hidden World, a secret Dragon
-            Utopia before a hired tyrant named Grimmel finds it first.
-        </item>
-        <item>Goku and Vegeta encounter Broly, a Saiyan warrior unlike any fighter they\'ve faced before.</item>
-        <item>Security guard David Dunn uses his supernatural abilities to track Kevin Wendell Crumb, a disturbed man
-            who has twenty-four personalities.
-        </item>
+        <item>Seorang musisi membantu seorang penyanyi muda menemukan ketenaran karena usia dan alkoholisme membuat kariernya menurun.</item>
+        <item>Arthur Curry, pewaris kelahiran manusia dari kerajaan bawah laut Atlantis, melanjutkan upaya untuk mencegah perang antara dunia lautan dan daratan.</item>
+        <item>The Avengers dan sekutu mereka harus rela mengorbankan semua dalam upaya untuk mengalahkan Thanos yang kuat sebelum kehancuran dan kehancurannya mengakhiri alam semesta.</item>
+        <item>Lima tahun setelah kehadiran tak terlihat yang tak menyenangkan membuat sebagian besar masyarakat bunuh diri, seorang ibu dan dua anaknya melakukan upaya putus asa untuk mencapai keselamatan.</item>
+        <item>Kisah band rock legendaris Queen dan vokalis Freddie Mercury, mengarah ke penampilan terkenal mereka di Live Aid (1985).</item>
+        <item>Dalam pelarian pada tahun 1987, Bumblebee menemukan tempat perlindungan di tempat barang rongsokan di kota pantai kecil California. Pada puncak usia 18 dan berusaha menemukan tempatnya di dunia, Charlie Watson menemukan Bumblebee, bekas luka pertempuran dan rusak.</item>
+        <item>Di bawah asuhan Rocky Balboa, juara kelas berat yang baru dinobatkan Adonis Creed berhadapan melawan Viktor Drago, putra dari Ivan Drago.</item>
+        <item>Tentara bayaran mutan bermulut kotor Wade Wilson (AKA. Deadpool), menyatukan tim sesama penjahat mutan untuk melindungi anak laki-laki dengan kemampuan supranatural dari cyborg yang brutal, penjelajah waktu, Cable.</item>
+        <item>Ketika Hiccup menemukan Toothless bukan satu-satunya Night Fury, ia harus mencari Dunia Tersembunyi, Utopia Naga rahasia sebelum seorang tiran sewaan bernama Grimmel menemukannya terlebih dahulu.</item>
+        <item>Goku dan Vegeta bertemu Broly, seorang prajurit Saiyan tidak seperti petarung yang pernah mereka hadapi sebelumnya.</item>
+        <item>Satpam David Dunn menggunakan kemampuan supernaturalnya untuk melacak Kevin Wendell Crumb, seorang lelaki terganggu yang memiliki dua puluh empat kepribadian.</item>
     </string-array>
 
     <string-array name="data_name_director">
@@ -165,17 +144,17 @@
         <item>James McAvoy, Bruce Willis, Samuel L. Jackson</item>
     </string-array>
 
-    <string name="movies">Movies</string>
-    <string name="tv_shows">Tv Shows</string>
-    <string name="title">Title</string>
+    <string name="movies">Film</string>
+    <string name="tv_shows">Acara TV</string>
+    <string name="title">Judul</string>
     <string name="dump_year">2008</string>
-    <string name="dump_genre">Crime, Drama, Mystery</string>
+    <string name="dump_genre">Kejahatan, Drama, Misteri</string>
     <string name="dummy_text">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident,.</string>
     <string name="dump_time">2h 3min</string>
-    <string name="director">Director</string>
-    <string name="stars">Stars</string>
+    <string name="director">Direktur</string>
+    <string name="stars">Bintang</string>
     <string name="dummy_director">Bradley Cooper</string>
-    <string name="dummy_stars">Lady Gaga, </string>
-    <string name="detail_movie">Detail Movie</string>
-    <string name="settings">Settings</string>
+    <string name="dummy_stars">Lady Gaga</string>
+    <string name="detail_movie">Detail Film</string>
+    <string name="settings">Pengaturan</string>
 </resources>
