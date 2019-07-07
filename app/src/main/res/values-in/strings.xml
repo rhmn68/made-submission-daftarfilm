@@ -1,8 +1,5 @@
 <resources>
     <string name="app_name">DaftarFilm</string>
-    <string name="example_desc">Seorang musisi membantu seorang penyanyi muda menemukan ketenaran karena usia dan alkoholisme membuat kariernya menurun.</string>
-    <string name="example_rating">4</string>
-    <string name="example_title">Judul</string>
 
     <array name="data_poster">
         <item>@drawable/poster_a_star</item>

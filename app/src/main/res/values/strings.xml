@@ -1,8 +1,5 @@
 <resources>
     <string name="app_name">MovieList</string>
-    <string name="example_desc">A musician helps a young singer find fame as age and alcoholism send his own career into a downward spiral.</string>
-    <string name="example_rating">4</string>
-    <string name="example_title">Title</string>
 
     <array name="data_poster">
         <item>@drawable/poster_a_star</item>

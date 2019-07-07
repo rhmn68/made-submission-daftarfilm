@@ -5,22 +5,8 @@
     <dimen name="margin_left">8dp</dimen>
     <dimen name="margin_right">8dp</dimen>
 
-    <dimen name="H5">24sp</dimen>
     <dimen name="H6">20sp</dimen>
     <dimen name="Subtitle1">16sp</dimen>
     <dimen name="Subtitle2">14sp</dimen>
     <dimen name="Body1">16sp</dimen>
-    <dimen name="Body2">14sp</dimen>
-    <dimen name="Button">14sp</dimen>
-    <dimen name="Caption">12sp</dimen>
-    <dimen name="Overline">10sp</dimen>
-    <dimen name="letterSpacingH5">0</dimen>
-    <dimen name="letterSpacingH6">0.15</dimen>
-    <dimen name="letterSpacingSubtitle1">0.15</dimen>
-    <dimen name="letterSpacingSubtitle2">0.1</dimen>
-    <dimen name="letterSpacingBody1">0.5</dimen>
-    <dimen name="letterSpacingBody2">0.25</dimen>
-    <dimen name="letterSpacingButton">0.25</dimen>
-    <dimen name="letterSpacingCaption">0.4</dimen>
-    <dimen name="letterSpacingOverline">1.5</dimen>
 </resources>
