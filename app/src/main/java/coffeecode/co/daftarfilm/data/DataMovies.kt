@@ -1,12 +1,9 @@
 package coffeecode.co.daftarfilm.data
 
 import android.content.Context
-import android.util.Log
 import coffeecode.co.daftarfilm.R
 import coffeecode.co.daftarfilm.model.MoviesModel
 import kotlin.random.Random
-
-
 
 class DataMovies(context: Context?){
 

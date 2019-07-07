@@ -11,7 +11,6 @@ import coffeecode.co.daftarfilm.adapter.TabMoviesAdapter
 import coffeecode.co.daftarfilm.fragment.MoviesFragment
 import coffeecode.co.daftarfilm.fragment.TvShowFragment
 import kotlinx.android.synthetic.main.activity_main.*
-import org.jetbrains.anko.startActivity
 
 class MainActivity : AppCompatActivity() {
 
