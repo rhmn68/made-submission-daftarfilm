@@ -37,6 +37,7 @@ class DetailActivity : AppCompatActivity() {
 
     private fun setView(moviesModel: MoviesModel?) {
         Glide.with(this).load(moviesModel?.imagePoster).into(ivPoster)
+        Glide.with(this).load(moviesModel?.imageBanner).into(ivBanner)
 
         tvTitle.text = moviesModel?.title
         tvYear.text = moviesModel?.year
