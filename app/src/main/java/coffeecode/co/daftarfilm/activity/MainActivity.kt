@@ -2,8 +2,8 @@ package coffeecode.co.daftarfilm.activity
 
 import android.content.Intent
 import android.os.Bundle
-import android.support.v7.app.AppCompatActivity
 import android.widget.AdapterView
+import androidx.appcompat.app.AppCompatActivity
 import coffeecode.co.daftarfilm.R
 import coffeecode.co.daftarfilm.adapter.DaftarFilmAdapter
 import coffeecode.co.daftarfilm.model.DaftarFilmModel

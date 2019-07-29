@@ -1,7 +1,7 @@
 package coffeecode.co.daftarfilm.activity
 
-import android.support.v7.app.AppCompatActivity
 import android.os.Bundle
+import androidx.appcompat.app.AppCompatActivity
 import coffeecode.co.daftarfilm.R
 import coffeecode.co.daftarfilm.model.DaftarFilmModel
 import com.bumptech.glide.Glide
