@@ -1,12 +1,16 @@
-package coffeecode.co.daftarfilm.activity
+package coffeecode.co.daftarfilm.features.main.view
 
 import android.content.Intent
 import android.os.Bundle
+import android.util.Log
 import android.widget.AdapterView
 import androidx.appcompat.app.AppCompatActivity
 import coffeecode.co.daftarfilm.R
-import coffeecode.co.daftarfilm.adapter.DaftarFilmAdapter
-import coffeecode.co.daftarfilm.model.DaftarFilmModel
+import coffeecode.co.daftarfilm.features.detail.view.DetailActivity
+import coffeecode.co.daftarfilm.features.main.adapter.DaftarFilmAdapter
+import coffeecode.co.daftarfilm.features.main.model.DaftarFilmModel
+import coffeecode.co.daftarfilm.repo.MainRepository
+import com.google.gson.Gson
 import kotlinx.android.synthetic.main.activity_main.*
 
 class MainActivity : AppCompatActivity() {
@@ -21,12 +25,13 @@ class MainActivity : AppCompatActivity() {
         setData()
         setAdapter()
         onClick()
+        Log.d("coba", "response : ${Gson().toJson(MainRepository.getDataImage())}")
     }
 
     private fun onClick() {
         lvDaftarFilm.onItemClickListener = AdapterView.OnItemClickListener { _, _, position, _ ->
             val intent = Intent(this, DetailActivity::class.java)
-            intent.putExtra(Companion.EXTRA_DAFTAR_FILM, listDaftarFilm[position])
+            intent.putExtra(EXTRA_DAFTAR_FILM, listDaftarFilm[position])
             startActivity(intent)
         }
 

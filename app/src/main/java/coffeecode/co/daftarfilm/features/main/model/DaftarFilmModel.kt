@@ -1,4 +1,4 @@
-package coffeecode.co.daftarfilm.model
+package coffeecode.co.daftarfilm.features.main.model
 
 import android.os.Parcel
 import android.os.Parcelable

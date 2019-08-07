@@ -1,4 +1,4 @@
-package coffeecode.co.daftarfilm.adapter
+package coffeecode.co.daftarfilm.features.main.adapter
 
 import android.content.Context
 import android.view.LayoutInflater
@@ -8,7 +8,7 @@ import android.widget.BaseAdapter
 import android.widget.ImageView
 import android.widget.TextView
 import coffeecode.co.daftarfilm.R
-import coffeecode.co.daftarfilm.model.DaftarFilmModel
+import coffeecode.co.daftarfilm.features.main.model.DaftarFilmModel
 import com.bumptech.glide.Glide
 
 
