@@ -1,4 +1,4 @@
-package coffeecode.co.daftarfilm.fragment
+package coffeecode.co.daftarfilm.features.main.view.fragment
 
 
 import android.os.Bundle
@@ -7,20 +7,20 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.LinearLayoutManager
 import coffeecode.co.daftarfilm.R
-import coffeecode.co.daftarfilm.activity.DetailActivity
+import coffeecode.co.daftarfilm.features.main.view.activity.DetailActivity
 import coffeecode.co.daftarfilm.adapter.MoviesAdapter
 import coffeecode.co.daftarfilm.data.DataMovies
-import kotlinx.android.synthetic.main.fragment_movies.*
+import kotlinx.android.synthetic.main.fragment_tv_show.*
 import org.jetbrains.anko.support.v4.startActivity
 
-class MoviesFragment : androidx.fragment.app.Fragment() {
+class TvShowFragment : androidx.fragment.app.Fragment() {
 
     private lateinit var moviesAdapter: MoviesAdapter
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
-    ): View? = inflater.inflate(R.layout.fragment_movies, container, false)
+    ): View? = inflater.inflate(R.layout.fragment_tv_show, container, false)
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
@@ -28,14 +28,12 @@ class MoviesFragment : androidx.fragment.app.Fragment() {
     }
 
     private fun setAdapter() {
-        moviesAdapter = MoviesAdapter(DataMovies(activity).getDataMovies()){
+        moviesAdapter = MoviesAdapter(DataMovies(activity).getDataTvShows()){
             startActivity<DetailActivity>(DetailActivity.KEY_DATA_MOVIES to it)
         }
         moviesAdapter.notifyDataSetChanged()
 
-        rvMovies.layoutManager = LinearLayoutManager(activity)
-        rvMovies.adapter = moviesAdapter
+        rvTvShow.layoutManager = LinearLayoutManager(activity)
+        rvTvShow.adapter = moviesAdapter
     }
-
-
 }

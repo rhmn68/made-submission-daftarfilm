@@ -1,4 +1,4 @@
-package coffeecode.co.daftarfilm.activity
+package coffeecode.co.daftarfilm.features.main.view.activity
 
 import android.content.Intent
 import android.os.Bundle
@@ -8,8 +8,8 @@ import android.view.MenuItem
 import androidx.appcompat.app.AppCompatActivity
 import coffeecode.co.daftarfilm.R
 import coffeecode.co.daftarfilm.adapter.TabMoviesAdapter
-import coffeecode.co.daftarfilm.fragment.MoviesFragment
-import coffeecode.co.daftarfilm.fragment.TvShowFragment
+import coffeecode.co.daftarfilm.features.main.view.fragment.MoviesFragment
+import coffeecode.co.daftarfilm.features.main.view.fragment.TvShowFragment
 import kotlinx.android.synthetic.main.activity_main.*
 
 class MainActivity : AppCompatActivity() {

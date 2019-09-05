@@ -1,4 +1,4 @@
-package coffeecode.co.daftarfilm.activity
+package coffeecode.co.daftarfilm.features.main.view.activity
 
 import android.os.Bundle
 import android.util.Log
