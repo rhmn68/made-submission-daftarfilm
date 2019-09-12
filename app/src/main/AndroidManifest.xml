@@ -25,7 +25,8 @@
 
         <activity android:name=".features.detail.view.DetailActivity"/>
 
-        <activity android:name=".features.main.view.MainActivity">
+        <activity android:name=".features.main.MainActivity"
+            android:theme="@style/AppTheme.NoActionBar">
             <intent-filter>
                 <action android:name="android.intent.action.VIEW"/>
             </intent-filter>

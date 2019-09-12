@@ -4,7 +4,7 @@ import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.os.Handler
 import coffeecode.co.daftarfilm.R
-import coffeecode.co.daftarfilm.features.main.view.MainActivity
+import coffeecode.co.daftarfilm.features.main.MainActivity
 import org.jetbrains.anko.startActivity
 
 class SplashActivity : AppCompatActivity() {

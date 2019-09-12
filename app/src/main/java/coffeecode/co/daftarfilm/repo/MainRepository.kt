@@ -1,7 +1,7 @@
 package coffeecode.co.daftarfilm.repo
 
 import coffeecode.co.daftarfilm.BuildConfig
-import coffeecode.co.daftarfilm.features.main.model.image_config.ImageConfigResponse
+import coffeecode.co.daftarfilm.model.image_config.ImageConfigResponse
 import coffeecode.co.daftarfilm.networking.ApiServices
 import io.reactivex.schedulers.Schedulers
 

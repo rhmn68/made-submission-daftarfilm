@@ -1,6 +1,6 @@
 package coffeecode.co.daftarfilm.networking
 
-import coffeecode.co.daftarfilm.features.main.model.image_config.ImageConfigResponse
+import coffeecode.co.daftarfilm.model.image_config.ImageConfigResponse
 import io.reactivex.Observable
 import retrofit2.http.GET
 import retrofit2.http.Query

@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+    <item
+        android:id="@+id/action_home"
+        android:title="@string/home"
+        android:icon="@drawable/ic_home_black_24dp"
+        app:showAsAction="ifRoom"/>
+
+    <item
+        android:id="@+id/action_search"
+        android:title="@string/search"
+        android:icon="@drawable/ic_search_black_24dp"
+        app:showAsAction="ifRoom"/>
+
+    <item
+        android:id="@+id/action_movies"
+        android:title="@string/movies"
+        android:icon="@drawable/ic_movie_black_24dp"
+        app:showAsAction="ifRoom"/>
+
+    <item
+        android:id="@+id/action_tv_shows"
+        android:title="@string/tv_shows"
+        android:icon="@drawable/ic_live_tv_black_24dp"
+        app:showAsAction="always"/>
+
+    <item
+        android:id="@+id/action_profile"
+        android:title="@string/profile"
+        android:icon="@drawable/ic_person_black_24dp"
+        app:showAsAction="always"/>
+
+</menu>

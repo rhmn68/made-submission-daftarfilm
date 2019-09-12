@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <ImageView
+        android:id="@+id/ivBackDropNowPlaying"
+        android:layout_width="0dp"
+        android:layout_height="220dp"
+        android:src="@drawable/example_backdrop_w780"
+        android:scaleType="centerCrop"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"/>
+
+    <ImageView
+        android:id="@+id/ivPosterNowPlaying"
+        android:layout_width="92dp"
+        android:layout_height="138dp"
+        android:src="@drawable/example_poster_w92"
+        android:layout_marginStart="@dimen/main_margin"
+        android:layout_marginEnd="@dimen/main_margin"
+        android:scaleType="centerCrop"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintBottom_toBottomOf="@id/tvDesc"
+        app:layout_constraintEnd_toStartOf="@id/tvTittle"/>
+
+    <TextView
+        android:id="@+id/tvTittle"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:maxLines="1"
+        android:ellipsize="end"
+        android:text="@string/tittle"
+        android:textSize="@dimen/material_text_title"
+        android:textColor="@color/colorPrimaryDark"
+        android:textStyle="bold"
+        app:layout_constraintStart_toEndOf="@id/ivPosterNowPlaying"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/ivBackDropNowPlaying"/>
+
+    <TextView
+        android:id="@+id/tvDesc"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:textSize="@dimen/material_text_caption"
+        android:ellipsize="end"
+        android:maxLines="1"
+        android:text="@string/lorem_ipsum"
+        app:layout_constraintStart_toStartOf="@id/tvTittle"
+        app:layout_constraintTop_toBottomOf="@id/tvTittle"
+        app:layout_constraintEnd_toEndOf="parent"/>
+
+</androidx.constraintlayout.widget.ConstraintLayout>
