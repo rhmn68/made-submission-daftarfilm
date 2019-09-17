@@ -45,7 +45,7 @@
         android:id="@+id/tvDesc"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:textSize="@dimen/material_text_caption"
+        android:textSize="@dimen/material_text_body1"
         android:ellipsize="end"
         android:maxLines="1"
         android:text="@string/lorem_ipsum"

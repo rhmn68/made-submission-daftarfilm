@@ -11,13 +11,13 @@ import androidx.recyclerview.widget.PagerSnapHelper
 
 import coffeecode.co.daftarfilm.R
 import coffeecode.co.daftarfilm.adapter.AdapterNowPlaying
-import com.yarolegovich.discretescrollview.transform.Pivot
-import com.yarolegovich.discretescrollview.transform.ScaleTransformer
+import coffeecode.co.daftarfilm.adapter.AdapterKindOfMovies
 import kotlinx.android.synthetic.main.fragment_home.*
 
 class HomeFragment : Fragment() {
 
     private lateinit var adapterNowPlaying: AdapterNowPlaying
+    private lateinit var adapterKindOfMovies: AdapterKindOfMovies
 
     private val snapHelper = PagerSnapHelper()
 
@@ -26,7 +26,23 @@ class HomeFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+        initSwipeRefreshHome()
         setAdapterNowPlaying()
+        setAdapterKindOfMovies()
+    }
+
+    private fun initSwipeRefreshHome() {
+        swipeRefreshHome.setOnRefreshListener {
+            swipeRefreshHome.isRefreshing = false
+        }
+    }
+
+    private fun setAdapterKindOfMovies() {
+        adapterKindOfMovies = AdapterKindOfMovies(activity!!)
+        adapterKindOfMovies.notifyDataSetChanged()
+
+        rvKindOfMovies.layoutManager = LinearLayoutManager(activity)
+        rvKindOfMovies.adapter = adapterKindOfMovies
     }
 
     private fun setAdapterNowPlaying() {
@@ -36,6 +52,7 @@ class HomeFragment : Fragment() {
         rvNowPlaying.layoutManager = LinearLayoutManager(activity, LinearLayoutManager.HORIZONTAL, false)
         rvNowPlaying.adapter = adapterNowPlaying
         snapHelper.attachToRecyclerView(rvNowPlaying)
+        indicatorNowPlaying.attachTo(rvNowPlaying)
     }
 
 }

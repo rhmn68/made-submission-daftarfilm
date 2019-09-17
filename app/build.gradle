@@ -43,13 +43,14 @@ dependencies {
 
     //Glide
     implementation 'com.github.bumptech.glide:glide:4.9.0'
+    implementation 'jp.wasabeef:glide-transformations:4.0.0'
 
     //Live Data
     implementation 'androidx.lifecycle:lifecycle-extensions:2.1.0'
 
     // okhttp
-    implementation "com.squareup.okhttp3:okhttp:3.14.1"
-    implementation "com.squareup.okhttp3:logging-interceptor:3.14.1"
+    implementation 'com.squareup.okhttp3:okhttp:4.2.0'
+    implementation 'com.squareup.okhttp3:logging-interceptor:4.2.0'
 
     // retrofit
     implementation "com.squareup.retrofit2:retrofit:2.6.1"
@@ -70,4 +71,10 @@ dependencies {
 
     //Indicator
     implementation 'com.github.chahine:pageindicator:0.2.8'
+
+    //Youtube
+    implementation files('libs/YouTubeAndroidPlayerApi.jar')
+
+    //Circle Image View
+    implementation 'de.hdodenhof:circleimageview:3.0.0'
 }

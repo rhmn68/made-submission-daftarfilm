@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
 <androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
-    android:layout_width="300dp"
+    android:layout_width="match_parent"
     android:layout_height="wrap_content"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     app:cardCornerRadius="@dimen/card_radius"
     app:cardElevation="@dimen/main_elevation"
-    android:layout_marginEnd="@dimen/main_margin">
+    android:layout_marginBottom="@dimen/main_margin">
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
@@ -107,6 +107,28 @@
                 app:layout_constraintStart_toEndOf="@id/ratingBarKindOfMovie"
                 app:layout_constraintBottom_toBottomOf="@id/ratingBarKindOfMovie"
                 app:layout_constraintTop_toTopOf="@id/ratingBarKindOfMovie"/>
+
+            <ImageView
+                android:id="@+id/ivEye"
+                android:layout_width="20dp"
+                android:layout_height="20dp"
+                android:src="@drawable/ic_remove_red_eye_black_24dp"
+                android:tint="@android:color/darker_gray"
+                android:layout_marginEnd="8dp"
+                app:layout_constraintEnd_toStartOf="@id/tvVoteCount"
+                app:layout_constraintTop_toTopOf="@id/tvTotalRating"
+                app:layout_constraintBottom_toBottomOf="@id/tvTotalRating"/>
+
+            <TextView
+                android:id="@+id/tvVoteCount"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="552"
+                android:textSize="@dimen/material_text_body1"
+                android:layout_marginStart="8dp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintBottom_toBottomOf="@id/ivEye"
+                app:layout_constraintTop_toTopOf="@id/ivEye"/>
 
         </androidx.constraintlayout.widget.ConstraintLayout>
 

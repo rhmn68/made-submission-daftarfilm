@@ -1,0 +1,263 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.core.widget.NestedScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".features.detail.MovieDetailActivity">
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/ivBackDropMovieDetail">
+
+            <ImageView
+                android:id="@+id/ivPosterBlurMovieDetail"
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                android:src="@drawable/example_poster_w154"
+                android:scaleType="centerCrop"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintBottom_toBottomOf="parent"/>
+
+            <View
+                android:layout_width="0dp"
+                android:layout_height="0dp"
+                android:background="@color/overlayBlack"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintBottom_toBottomOf="@id/ivPosterBlurMovieDetail"/>
+
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:orientation="vertical"
+                android:paddingTop="@dimen/main_padding"
+                android:paddingBottom="@dimen/main_padding">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    android:layout_marginStart="@dimen/main_margin"
+                    android:layout_marginEnd="@dimen/main_margin"
+                    android:layout_marginTop="@dimen/main_margin">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Release"
+                        android:textColor="@color/white"
+                        android:textSize="@dimen/material_text_headline"/>
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="(2016)"
+                        android:textColor="@color/white"
+                        android:textSize="@dimen/material_text_title"/>
+
+                </LinearLayout>
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Spider Man Home Coming"
+                    android:maxLines="2"
+                    android:ellipsize="end"
+                    android:textSize="@dimen/material_text_display1"
+                    android:textColor="@color/white"
+                    android:layout_marginStart="@dimen/main_margin"
+                    android:layout_marginEnd="@dimen/main_margin"/>
+
+                <fragment
+                    android:id="@+id/youtubeView"
+                    android:layout_width="match_parent"
+                    android:layout_height="200dp"
+                    android:name="com.google.android.youtube.player.YouTubePlayerSupportFragment"
+                    android:layout_marginTop="@dimen/main_margin"/>
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="@string/overview"
+                    android:textColor="@color/white"
+                    android:textSize="@dimen/material_text_subhead"
+                    android:layout_marginStart="@dimen/main_margin"
+                    android:layout_marginEnd="@dimen/main_margin"
+                    android:layout_marginTop="@dimen/main_margin"/>
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="@string/lorem_ipsum"
+                    android:textColor="@color/white"
+                    android:textSize="@dimen/material_text_body1"
+                    android:layout_marginTop="8dp"
+                    android:layout_marginStart="@dimen/main_margin"
+                    android:layout_marginEnd="@dimen/main_margin"/>
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/cast"
+                    android:textColor="@color/white"
+                    android:textSize="@dimen/material_text_subhead"
+                    android:layout_marginTop="@dimen/main_margin"
+                    android:layout_marginStart="@dimen/main_margin"
+                    android:layout_marginEnd="@dimen/main_margin"/>
+
+                <androidx.recyclerview.widget.RecyclerView
+                    android:id="@+id/rvCast"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+                    android:layout_marginTop="8dp"
+                    android:paddingStart="@dimen/main_padding"
+                    android:paddingEnd="@dimen/main_padding"
+                    android:clipToPadding="false"
+                    tools:listitem="@layout/item_cast"/>
+
+            </LinearLayout>
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+        <ImageView
+            android:id="@+id/ivBackDropMovieDetail"
+            android:layout_width="0dp"
+            android:layout_height="240dp"
+            android:scaleType="centerCrop"
+            android:src="@drawable/example_backdrop_w780"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="parent"/>
+
+        <View
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:background="@color/overlayBlack"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintBottom_toBottomOf="@id/ivBackDropMovieDetail"/>
+
+        <com.google.android.material.appbar.AppBarLayout
+            android:layout_width="match_parent"
+            android:layout_height="?attr/actionBarSize"
+            app:elevation="0dp"
+            android:theme="@style/ThemeOverlay.AppCompat.Dark.ActionBar"
+            android:background="@android:color/transparent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent">
+
+            <androidx.appcompat.widget.Toolbar
+                android:id="@+id/tbMovieDetail"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                app:title="@string/movies"
+                app:popupTheme="@style/ThemeOverlay.AppCompat.Light"/>
+
+        </com.google.android.material.appbar.AppBarLayout>
+
+        <ImageView
+            android:id="@+id/ivPosterDetailMovie"
+            android:layout_width="126dp"
+            android:layout_height="186dp"
+            android:src="@drawable/example_poster_w154"
+            android:layout_marginStart="@dimen/main_margin"
+            android:layout_marginEnd="@dimen/main_margin"
+            android:scaleType="centerCrop"
+            android:layout_marginTop="90dp"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintBottom_toBottomOf="@id/ivBackDropMovieDetail"
+            app:layout_constraintTop_toTopOf="@id/ivBackDropMovieDetail"/>
+
+        <TextView
+            android:id="@+id/textViewFeatureCrew"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:text="@string/featured_crew"
+            android:textSize="@dimen/material_text_caption"
+            android:textColor="@color/white"
+            android:maxLines="2"
+            android:ellipsize="end"
+            android:layout_marginStart="@dimen/main_margin"
+            android:layout_marginTop="8dp"
+            android:layout_marginEnd="@dimen/main_margin"
+            app:layout_constraintTop_toTopOf="@id/ivPosterDetailMovie"
+            app:layout_constraintStart_toEndOf="@id/ivPosterDetailMovie"
+            app:layout_constraintEnd_toEndOf="parent" />
+
+        <LinearLayout
+            android:id="@+id/containerFeatureCrew"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:layout_marginTop="8dp"
+            app:layout_constraintTop_toBottomOf="@id/textViewFeatureCrew"
+            app:layout_constraintStart_toStartOf="@id/textViewFeatureCrew"
+            app:layout_constraintEnd_toEndOf="@id/textViewFeatureCrew"
+            app:layout_constraintBottom_toTopOf="@id/tvGenre"
+            app:layout_constraintVertical_bias="0.0">
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Aulia Rahman"
+                android:textColor="@color/white"
+                android:textSize="@dimen/material_text_subhead"/>
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Director"
+                android:textColor="@color/white"
+                android:textSize="@dimen/material_text_caption"
+                android:layout_marginBottom="8dp"/>
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Aulia Rahman"
+                android:textColor="@color/white"
+                android:textSize="@dimen/material_text_subhead"/>
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Director"
+                android:textColor="@color/white"
+                android:textSize="@dimen/material_text_caption" />
+
+        </LinearLayout>
+
+        <TextView
+            android:id="@+id/tvGenre"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:text="@string/example_genre"
+            android:textSize="@dimen/material_text_caption"
+            android:textColor="@android:color/darker_gray"
+            android:layout_marginBottom="@dimen/main_margin"
+            android:maxLines="1"
+            android:ellipsize="end"
+            app:layout_constraintBottom_toBottomOf="@id/ivBackDropMovieDetail"
+            app:layout_constraintStart_toStartOf="@id/containerFeatureCrew"
+            app:layout_constraintEnd_toEndOf="@id/containerFeatureCrew"/>
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+</androidx.core.widget.NestedScrollView>

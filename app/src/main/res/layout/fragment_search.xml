@@ -1,9 +1,33 @@
 <?xml version="1.0" encoding="utf-8"?>
-<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:focusableInTouchMode="true"
+    android:focusable="true"
+    android:background="@color/colorPrimary"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     tools:context=".features.main.subfeatures.search.SearchFragment">
 
+    <androidx.appcompat.widget.SearchView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        style="@style/Widget.AppCompat.SearchView.ActionBar"
+        android:background="@drawable/bg_rounded_white_30dp"
+        app:queryHint="Search movie or tv shows"
+        app:iconifiedByDefault="false"
+        android:elevation="@dimen/main_elevation"
+        android:layout_margin="@dimen/main_margin"/>
 
-</FrameLayout>
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/rvSearchMovie"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:paddingStart="@dimen/main_padding"
+        android:paddingEnd="@dimen/main_padding"
+        android:paddingBottom="@dimen/main_padding"
+        android:clipToPadding="false"
+        tools:listitem="@layout/item_vertical_list_movies"/>
+
+</LinearLayout>

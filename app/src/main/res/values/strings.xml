@@ -11,4 +11,13 @@
     <string name="tittle">Tittle</string>
     <string name="now_playing">Now Playing</string>
     <string name="see_all">See All</string>
+    <string name="example_genre">Drama, Comedy, Perhap horror</string>
+    <string name="featured_crew">Featured Crew</string>
+    <string name="overview">Overview</string>
+    <string name="cast">Cast</string>
+    <string name="full_name">Full Name</string>
+    <string name="hello">Hello</string>
+    <string name="notifications">Notifications</string>
+    <string name="settings">Settings</string>
+    <string name="info">Info</string>
 </resources>
