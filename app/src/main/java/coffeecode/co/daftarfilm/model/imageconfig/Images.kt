@@ -1,4 +1,4 @@
-package coffeecode.co.daftarfilm.model.image_config
+package coffeecode.co.daftarfilm.model.imageconfig
 
 import com.google.gson.annotations.SerializedName
 

@@ -26,10 +26,10 @@ class TvShowsFragment : Fragment() {
     }
 
     private fun setAdapterTvShowsList() {
-        adapterKindOfMovies = AdapterKindOfMovies(activity!!)
-        adapterKindOfMovies.notifyDataSetChanged()
-
-        rvTvShowsList.layoutManager = LinearLayoutManager(activity)
-        rvTvShowsList.adapter = adapterKindOfMovies
+//        adapterKindOfMovies = AdapterKindOfMovies(activity!!)
+//        adapterKindOfMovies.notifyDataSetChanged()
+//
+//        rvTvShowsList.layoutManager = LinearLayoutManager(activity)
+//        rvTvShowsList.adapter = adapterKindOfMovies
     }
 }

@@ -6,7 +6,7 @@
     xmlns:tools="http://schemas.android.com/tools">
 
     <TextView
-        android:id="@+id/tvTittle"
+        android:id="@+id/tvTittleKindOfMovies"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="@string/tittle"
@@ -18,15 +18,15 @@
         app:layout_constraintTop_toTopOf="parent"/>
 
     <TextView
-        android:id="@+id/tvSeeAll"
+        android:id="@+id/tvSeeAllKindOfMovies"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="@string/see_all"
         android:textSize="@dimen/material_text_body1"
         android:textColor="@color/colorPrimaryDark"
         android:layout_marginEnd="@dimen/main_margin"
-        app:layout_constraintTop_toTopOf="@id/tvTittle"
-        app:layout_constraintBottom_toBottomOf="@id/tvTittle"
+        app:layout_constraintTop_toTopOf="@id/tvTittleKindOfMovies"
+        app:layout_constraintBottom_toBottomOf="@id/tvTittleKindOfMovies"
         app:layout_constraintEnd_toEndOf="parent"/>
 
     <androidx.recyclerview.widget.RecyclerView
@@ -40,6 +40,6 @@
         app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/tvTittle"/>
+        app:layout_constraintTop_toBottomOf="@id/tvTittleKindOfMovies"/>
 
 </androidx.constraintlayout.widget.ConstraintLayout>

@@ -1,25 +1,52 @@
 package coffeecode.co.daftarfilm.features.main
 
 import android.os.Bundle
+import android.util.Log
 import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.Fragment
+import coffeecode.co.daftarfilm.BuildConfig
 import coffeecode.co.daftarfilm.R
 import coffeecode.co.daftarfilm.features.main.subfeatures.home.HomeFragment
 import coffeecode.co.daftarfilm.features.main.subfeatures.movies.MoviesFragment
 import coffeecode.co.daftarfilm.features.main.subfeatures.profile.ProfileFragment
 import coffeecode.co.daftarfilm.features.main.subfeatures.search.SearchFragment
 import coffeecode.co.daftarfilm.features.main.subfeatures.tvshows.TvShowsFragment
+import coffeecode.co.daftarfilm.networking.ApiServices
+import coffeecode.co.daftarfilm.storage.HawkStorage
 import com.google.android.material.bottomnavigation.BottomNavigationView
+import io.reactivex.schedulers.Schedulers
 import kotlinx.android.synthetic.main.activity_main.*
 
 class MainActivity : AppCompatActivity() {
+
+    private lateinit var hawkStorage: HawkStorage
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
 
+        initHawkStorage()
+        getConfigurationAndSaveToStorage()
         initBottomNavigation()
         openHomeFragment()
+    }
+
+    private fun initHawkStorage() {
+        hawkStorage = HawkStorage(this)
+        hawkStorage.instance()
+    }
+
+    private fun getConfigurationAndSaveToStorage() {
+        ApiServices.getMovieServices()
+            .getConfiguration(BuildConfig.TOKEN_MOVIE_DB)
+            .subscribeOn(Schedulers.io())
+            .subscribe({
+                if (it != null){
+                    hawkStorage.setImageConfig(it)
+                }
+            },{
+                it.printStackTrace()
+            })
     }
 
     override fun onBackPressed() {

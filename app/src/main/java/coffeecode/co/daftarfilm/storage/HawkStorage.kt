@@ -1,7 +1,7 @@
 package coffeecode.co.daftarfilm.storage
 
 import android.content.Context
-import coffeecode.co.daftarfilm.model.image_config.ImageConfigResponse
+import coffeecode.co.daftarfilm.model.imageconfig.ImageConfigResponse
 import com.orhanobut.hawk.Hawk
 
 class HawkStorage (val context: Context?){

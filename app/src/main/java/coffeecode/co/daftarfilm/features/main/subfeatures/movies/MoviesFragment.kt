@@ -26,11 +26,11 @@ class MoviesFragment : Fragment() {
     }
 
     private fun setAdapterMoviesList() {
-        adapterKindOfMovies = AdapterKindOfMovies(activity!!)
-        adapterKindOfMovies.notifyDataSetChanged()
-
-        rvMoviesList.layoutManager = LinearLayoutManager(activity)
-        rvMoviesList.adapter = adapterKindOfMovies
+//        adapterKindOfMovies = AdapterKindOfMovies(activity!!)
+//        adapterKindOfMovies.notifyDataSetChanged()
+//
+//        rvMoviesList.layoutManager = LinearLayoutManager(activity)
+//        rvMoviesList.adapter = adapterKindOfMovies
     }
 
 }

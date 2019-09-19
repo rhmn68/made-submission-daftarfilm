@@ -24,11 +24,11 @@
         android:layout_marginEnd="@dimen/main_margin"
         android:scaleType="centerCrop"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintBottom_toBottomOf="@id/tvDesc"
-        app:layout_constraintEnd_toStartOf="@id/tvTittle"/>
+        app:layout_constraintBottom_toBottomOf="@id/tvDescNowPlaying"
+        app:layout_constraintEnd_toStartOf="@id/tvTittleNowPlaying"/>
 
     <TextView
-        android:id="@+id/tvTittle"
+        android:id="@+id/tvTittleNowPlaying"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:maxLines="1"
@@ -42,15 +42,15 @@
         app:layout_constraintTop_toBottomOf="@id/ivBackDropNowPlaying"/>
 
     <TextView
-        android:id="@+id/tvDesc"
+        android:id="@+id/tvDescNowPlaying"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:textSize="@dimen/material_text_body1"
         android:ellipsize="end"
         android:maxLines="1"
         android:text="@string/lorem_ipsum"
-        app:layout_constraintStart_toStartOf="@id/tvTittle"
-        app:layout_constraintTop_toBottomOf="@id/tvTittle"
+        app:layout_constraintStart_toStartOf="@id/tvTittleNowPlaying"
+        app:layout_constraintTop_toBottomOf="@id/tvTittleNowPlaying"
         app:layout_constraintEnd_toEndOf="parent"/>
 
 </androidx.constraintlayout.widget.ConstraintLayout>
