@@ -71,6 +71,7 @@
                 </LinearLayout>
 
                 <TextView
+                    android:id="@+id/tvTittleDetailMovie"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="Spider Man Home Coming"
@@ -84,7 +85,7 @@
                 <fragment
                     android:id="@+id/youtubeView"
                     android:layout_width="match_parent"
-                    android:layout_height="200dp"
+                    android:layout_height="250dp"
                     android:name="com.google.android.youtube.player.YouTubePlayerSupportFragment"
                     android:layout_marginTop="@dimen/main_margin"/>
 
@@ -99,6 +100,7 @@
                     android:layout_marginTop="@dimen/main_margin"/>
 
                 <TextView
+                    android:id="@+id/tvOverviewDetailMovie"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:text="@string/lorem_ipsum"
@@ -214,6 +216,7 @@
             app:layout_constraintVertical_bias="0.0">
 
             <TextView
+                android:id="@+id/tvDirectorDetailMovie"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:text="Aulia Rahman"
@@ -229,6 +232,7 @@
                 android:layout_marginBottom="8dp"/>
 
             <TextView
+                android:id="@+id/tvFeatureCrewDetailMovie"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:text="Aulia Rahman"
@@ -236,6 +240,7 @@
                 android:textSize="@dimen/material_text_subhead"/>
 
             <TextView
+                android:id="@+id/tvJobFeatureCrewDetailMovie"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:text="Director"

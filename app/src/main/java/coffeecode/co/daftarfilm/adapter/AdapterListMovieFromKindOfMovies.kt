@@ -44,10 +44,28 @@ class AdapterListMovieFromKindOfMovies(private val context: Context, private val
 
             if (movie != null){
                 Glide.with(view).load(urlImagePoster).into(itemView.ivMovie)
-                itemView.tvTittleMovie.text = movie.originalTitle
-                itemView.tvReleaseDate.text = movie.releaseDate
                 itemView.ratingBarKindOfMovie.rating = movie.movieRate()
                 itemView.tvTotalRating.text = decimalFormat.format(movie.movieRate())
+
+                if (movie.releaseDate != null){
+                    itemView.tvReleaseDate.text = movie.releaseDate
+                }else{
+                    itemView.tvReleaseDate.text = movie.firstAirDate
+                }
+
+                if (movie.originalTitle != null){
+                    itemView.tvTittleMovie.text = movie.originalTitle
+                }else{
+                    itemView.tvTittleMovie.text = movie.originalName
+                }
+
+                for (element in movie.genreIds!!){
+                    for (j in hawkStorage.getGenres().genres!!.indices){
+                        if (hawkStorage.getGenres().genres!![j]?.id == element){
+                            itemView.tvGenre.text = hawkStorage.getGenres().genres!![j]?.name
+                        }
+                    }
+                }
 
                 view.setOnClickListener { listener(movie) }
             }

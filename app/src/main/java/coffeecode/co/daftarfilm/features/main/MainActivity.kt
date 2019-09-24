@@ -27,6 +27,7 @@ class MainActivity : AppCompatActivity() {
 
         initHawkStorage()
         getConfigurationAndSaveToStorage()
+        getGenresAndSaveToStorage()
         initBottomNavigation()
         openHomeFragment()
     }
@@ -34,6 +35,19 @@ class MainActivity : AppCompatActivity() {
     private fun initHawkStorage() {
         hawkStorage = HawkStorage(this)
         hawkStorage.instance()
+    }
+
+    private fun getGenresAndSaveToStorage() {
+        ApiServices.getMovieServices()
+                .getGenres(BuildConfig.TOKEN_MOVIE_DB)
+                .subscribeOn(Schedulers.io())
+                .subscribe({
+                    if (it != null){
+                        hawkStorage.setGenres(it)
+                    }
+                },{
+                    it.printStackTrace()
+                })
     }
 
     private fun getConfigurationAndSaveToStorage() {

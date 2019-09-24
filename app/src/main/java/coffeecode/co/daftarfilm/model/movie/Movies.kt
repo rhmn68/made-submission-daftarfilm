@@ -1,6 +1,7 @@
 package coffeecode.co.daftarfilm.model.movie
 
 import com.google.gson.annotations.SerializedName
+import java.io.Serializable
 
 data class Movies(
 
@@ -12,6 +13,9 @@ data class Movies(
 
 	@field:SerializedName("original_title")
 	val originalTitle: String? = null,
+
+	@field:SerializedName("original_name")
+	val originalName: String? = null,
 
 	@field:SerializedName("video")
 	val video: Boolean? = null,
@@ -31,6 +35,9 @@ data class Movies(
 	@field:SerializedName("release_date")
 	val releaseDate: String? = null,
 
+	@field:SerializedName("first_air_date")
+	val firstAirDate: String? = null,
+
 	@field:SerializedName("popularity")
 	val popularity: Double? = null,
 
@@ -45,7 +52,7 @@ data class Movies(
 
 	@field:SerializedName("vote_count")
 	val voteCount: Int? = null
-){
+): Serializable{
 	fun movieRate(): Float{
 		return voteAverage?.toFloat()!! / 2
 	}

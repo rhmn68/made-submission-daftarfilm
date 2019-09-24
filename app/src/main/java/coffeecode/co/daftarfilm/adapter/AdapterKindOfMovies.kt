@@ -14,8 +14,10 @@ import coffeecode.co.daftarfilm.model.movie.MovieResponse
 import kotlinx.android.synthetic.main.item_kind_of_movies.view.*
 import org.jetbrains.anko.startActivity
 
-class AdapterKindOfMovies(private val context: Context, private val listKindOfMovies: List<KindOfMovies>)
+class AdapterKindOfMovies(private val context: Context)
     : RecyclerView.Adapter<AdapterKindOfMovies.ViewHolder>(){
+
+    private val listKindOfMovies = mutableListOf<KindOfMovies>()
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder =
         ViewHolder(
@@ -30,6 +32,14 @@ class AdapterKindOfMovies(private val context: Context, private val listKindOfMo
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
         holder.bindItem(context, listKindOfMovies[position])
+    }
+
+    fun setData(dataKindOfMovies: List<KindOfMovies>?){
+        listKindOfMovies.clear()
+        if (dataKindOfMovies != null){
+            listKindOfMovies.addAll(dataKindOfMovies)
+        }
+        notifyDataSetChanged()
     }
 
     class ViewHolder(view: View): RecyclerView.ViewHolder(view){
@@ -51,7 +61,7 @@ class AdapterKindOfMovies(private val context: Context, private val listKindOfMo
         ) {
             adapterListMovieFromKindOfMovies =
                 AdapterListMovieFromKindOfMovies(context, movieResponse) {
-                    context.startActivity<MovieDetailActivity>()
+                    context.startActivity<MovieDetailActivity>(MovieDetailActivity.KEY_MOVIE_RESPONSE to it)
                 }
             adapterListMovieFromKindOfMovies.notifyDataSetChanged()
 

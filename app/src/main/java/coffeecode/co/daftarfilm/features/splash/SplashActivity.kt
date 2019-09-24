@@ -15,6 +15,7 @@ class SplashActivity : AppCompatActivity() {
 
         Handler().postDelayed({
             startActivity<MainActivity>()
+            finishAffinity()
         },1200)
     }
 

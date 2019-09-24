@@ -2,7 +2,6 @@ package coffeecode.co.daftarfilm.features.main.subfeatures.home
 
 
 import android.os.Bundle
-import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
@@ -16,13 +15,11 @@ import coffeecode.co.daftarfilm.R
 import coffeecode.co.daftarfilm.adapter.AdapterNowPlaying
 import coffeecode.co.daftarfilm.adapter.AdapterKindOfMovies
 import coffeecode.co.daftarfilm.features.detail.MovieDetailActivity
-import coffeecode.co.daftarfilm.features.main.subfeatures.MovieViewModel
+import coffeecode.co.daftarfilm.features.main.subfeatures.viewmodel.MovieViewModel
 import coffeecode.co.daftarfilm.model.kindofmovies.KindOfMovies
 import coffeecode.co.daftarfilm.model.movie.MovieResponse
-import com.google.gson.Gson
 import kotlinx.android.synthetic.main.fragment_home.*
 import org.jetbrains.anko.support.v4.startActivity
-import org.jetbrains.anko.support.v4.toast
 
 class HomeFragment : Fragment() {
 
@@ -38,10 +35,7 @@ class HomeFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         initSwipeRefreshHome()
-    }
 
-    override fun onActivityCreated(savedInstanceState: Bundle?) {
-        super.onActivityCreated(savedInstanceState)
         getAllDataHomeViewModel()
     }
 
@@ -55,26 +49,24 @@ class HomeFragment : Fragment() {
 
     private fun getAllDataHomeViewModel() {
         movieViewModel = ViewModelProviders.of(activity!!).get(MovieViewModel::class.java).apply {
-
-            getIsLoading()?.observe(activity!!, Observer {isLoading ->
-                toast("loading: $isLoading")
-                if (isLoading == true){
+            getIsLoading()?.observe(this@HomeFragment, Observer {isLoading ->
+                if (isLoading){
                     showLoading()
                 }else{
                     hideLoading()
                 }
             })
 
-            getDataNowPlaying()?.observe(activity!!, Observer {movieResponse ->
+            getDataNowPlaying()?.observe(this@HomeFragment, Observer {movieResponse ->
                 setAdapterNowPlaying(movieResponse)
             })
 
-            getDataMoviePopular()?.observe(activity!!, Observer { movieResponse ->
-                movieViewModel?.setDataKindOfMovies("Movie Popular", movieResponse)
-            })
-
-            getDataKindOfMovies()?.observe(activity!!, Observer { listKindOfMovies ->
-                setAdapterKindOfMovies(listKindOfMovies)
+            getDataKindOfMoviesForHome()?.observe(this@HomeFragment, Observer {
+                setShowLoading()
+                if (it != null){
+                    setHideLoading()
+                    setAdapterKindOfMovies(it)
+                }
             })
         }
     }
@@ -87,8 +79,8 @@ class HomeFragment : Fragment() {
     }
 
     private fun setAdapterKindOfMovies(listKindOfMovies: List<KindOfMovies>) {
-        adapterKindOfMovies = AdapterKindOfMovies(activity!!, listKindOfMovies)
-        adapterKindOfMovies.notifyDataSetChanged()
+        adapterKindOfMovies = AdapterKindOfMovies(activity!!)
+        adapterKindOfMovies.setData(listKindOfMovies)
 
         rvKindOfMovies.layoutManager = LinearLayoutManager(activity)
         rvKindOfMovies.adapter = adapterKindOfMovies

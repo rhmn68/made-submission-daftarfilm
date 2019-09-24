@@ -8,19 +8,24 @@
     android:layout_marginEnd="12dp">
 
     <de.hdodenhof.circleimageview.CircleImageView
+        android:id="@+id/ivProfileCast"
         android:layout_width="50dp"
         android:layout_height="50dp"
         android:src="@android:color/darker_gray"/>
 
     <TextView
+        android:id="@+id/tvNameCast"
         android:layout_marginTop="8dp"
-        android:layout_width="wrap_content"
+        android:layout_width="80dp"
         android:layout_height="wrap_content"
         android:textColor="@color/white"
         android:textSize="@dimen/material_text_body1"
-        android:text="Name Cast"/>
+        android:textAlignment="center"
+        android:maxLines="2"
+        android:text="Name asdasdCast"/>
 
     <TextView
+        android:id="@+id/tvCharacterCast"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:textSize="@dimen/material_text_caption"

@@ -1,6 +1,7 @@
 package coffeecode.co.daftarfilm.model.movie
 
 import com.google.gson.annotations.SerializedName
+import java.io.Serializable
 
 data class MovieResponse(
 
@@ -18,4 +19,4 @@ data class MovieResponse(
 
 	@field:SerializedName("total_results")
 	val totalResults: Int? = null
-)
+): Serializable
