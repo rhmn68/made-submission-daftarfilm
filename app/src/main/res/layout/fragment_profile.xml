@@ -4,7 +4,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    tools:context=".features.main.subfeatures.profile.ProfileFragment">
+    tools:context=".features.main.profile.ProfileFragment">
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -40,6 +40,7 @@
             android:layout_gravity="center_horizontal"/>
 
         <LinearLayout
+            android:id="@+id/btnNotifications"
             android:layout_marginTop="40dp"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -72,6 +73,7 @@
             android:background="@android:color/darker_gray"/>
 
         <LinearLayout
+            android:id="@+id/btnSettings"
             android:layout_marginTop="20dp"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -104,6 +106,7 @@
             android:background="@android:color/darker_gray"/>
 
         <LinearLayout
+            android:id="@+id/btnInfo"
             android:layout_marginTop="20dp"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -123,6 +126,39 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="@string/info"
+                android:textSize="@dimen/material_text_title"
+                android:textColor="@android:color/darker_gray"/>
+
+        </LinearLayout>
+
+        <View
+            android:layout_marginTop="16dp"
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:layout_marginStart="28dp"
+            android:background="@android:color/darker_gray"/>
+
+        <LinearLayout
+            android:id="@+id/btnChangeLanguage"
+            android:layout_marginTop="20dp"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:layout_marginStart="40dp"
+            android:layout_marginEnd="@dimen/main_padding"
+            android:gravity="center_vertical">
+
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:src="@drawable/ic_language_black_24dp"
+                android:tint="@android:color/darker_gray"
+                android:layout_marginEnd="@dimen/main_margin"/>
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/change_language"
                 android:textSize="@dimen/material_text_title"
                 android:textColor="@android:color/darker_gray"/>
 

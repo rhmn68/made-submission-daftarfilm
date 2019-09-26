@@ -19,7 +19,7 @@ class AdapterCast(private val context: Context): RecyclerView.Adapter<AdapterCas
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder =
         ViewHolder(LayoutInflater.from(parent.context).inflate(R.layout.item_cast, parent, false))
 
-    override fun getItemCount(): Int = creditsResponse.cast!!.size
+    override fun getItemCount(): Int = 10
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
         holder.bindItem(context, creditsResponse.cast?.get(position))

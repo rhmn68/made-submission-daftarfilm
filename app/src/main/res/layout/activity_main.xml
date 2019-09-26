@@ -23,7 +23,6 @@
         android:elevation="@dimen/main_elevation"
         android:background="@color/white"
         app:labelVisibilityMode="unlabeled"
-        app:itemIconTint="@android:color/darker_gray"
         app:menu="@menu/home_menu"
         app:elevation="@dimen/main_elevation"
         app:layout_constraintBottom_toBottomOf="parent"

@@ -24,26 +24,33 @@ interface MovieApiServices{
     fun getConfiguration(@Query("api_key") apiKey: String?): Observable<ImageConfigResponse>
 
     @GET("genre/movie/list")
-    fun getGenres(@Query("api_key") apiKey: String?): Observable<GenreResponse>
+    fun getGenres(@Query("api_key") apiKey: String?,
+                  @Query("language") language: String?): Observable<GenreResponse>
 
     @GET("movie/now_playing")
-    fun getMovieNowPlaying(@Query("api_key") apiKey: String?): Observable<MovieResponse>
+    fun getMovieNowPlaying(@Query("api_key") apiKey: String?,
+                           @Query("language") language: String?): Observable<MovieResponse>
 
     @GET("movie/popular")
-    fun getMoviePopular(@Query("api_key") apiKey: String?): Observable<MovieResponse>
+    fun getMoviePopular(@Query("api_key") apiKey: String?,
+                        @Query("language") language: String?): Observable<MovieResponse>
 
     @GET("movie/upcoming")
-    fun getMovieUpComing(@Query("api_key") apiKey: String?): Observable<MovieResponse>
+    fun getMovieUpComing(@Query("api_key") apiKey: String?,
+                         @Query("language") language: String?): Observable<MovieResponse>
 
     @GET("movie/top_rated")
-    fun getMovieTopRated(@Query("api_key") apiKey: String?): Observable<MovieResponse>
+    fun getMovieTopRated(@Query("api_key") apiKey: String?,
+                         @Query("language") language: String?): Observable<MovieResponse>
 
     @GET("discover/movie")
-    fun getMovieDiscover(@Query("api_key") apiKey: String?): Observable<MovieResponse>
+    fun getMovieDiscover(@Query("api_key") apiKey: String?,
+                         @Query("language") language: String?): Observable<MovieResponse>
 
     @GET("movie/{movie_id}")
     fun getDetailMovie(@Path("movie_id") movieId: Int,
-                       @Query("api_key") apiKey: String?) : Observable<MovieDetailResponse>
+                       @Query("api_key") apiKey: String?,
+                       @Query("language") language: String?) : Observable<MovieDetailResponse>
 
     @GET("movie/{movie_id}/credits")
     fun getCreditsMovie(@Path("movie_id") movieId: Int,

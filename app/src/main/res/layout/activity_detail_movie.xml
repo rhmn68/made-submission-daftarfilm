@@ -22,7 +22,7 @@
                 android:id="@+id/ivPosterBlurMovieDetail"
                 android:layout_width="match_parent"
                 android:layout_height="0dp"
-                android:src="@drawable/example_poster_w154"
+                android:src="@android:color/darker_gray"
                 android:scaleType="centerCrop"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
@@ -57,14 +57,14 @@
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="Release"
+                        android:text="@string/release"
                         android:textColor="@color/white"
                         android:textSize="@dimen/material_text_headline"/>
 
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="(2016)"
+                        android:text="@string/example_year"
                         android:textColor="@color/white"
                         android:textSize="@dimen/material_text_title"/>
 
@@ -74,7 +74,7 @@
                     android:id="@+id/tvTittleDetailMovie"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="Spider Man Home Coming"
+                    android:text="@string/tittle"
                     android:maxLines="2"
                     android:ellipsize="end"
                     android:textSize="@dimen/material_text_display1"
@@ -103,7 +103,6 @@
                     android:id="@+id/tvOverviewDetailMovie"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:text="@string/lorem_ipsum"
                     android:textColor="@color/white"
                     android:textSize="@dimen/material_text_body1"
                     android:layout_marginTop="8dp"
@@ -141,7 +140,7 @@
             android:layout_width="0dp"
             android:layout_height="240dp"
             android:scaleType="centerCrop"
-            android:src="@drawable/example_backdrop_w780"
+            android:src="@android:color/darker_gray"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintTop_toTopOf="parent"/>
@@ -178,7 +177,7 @@
             android:id="@+id/ivPosterDetailMovie"
             android:layout_width="126dp"
             android:layout_height="186dp"
-            android:src="@drawable/example_poster_w154"
+            android:src="@android:color/darker_gray"
             android:layout_marginStart="@dimen/main_margin"
             android:layout_marginEnd="@dimen/main_margin"
             android:scaleType="centerCrop"
@@ -219,14 +218,15 @@
                 android:id="@+id/tvDirectorDetailMovie"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="Aulia Rahman"
+                android:text="@string/name"
                 android:textColor="@color/white"
                 android:textSize="@dimen/material_text_subhead"/>
 
             <TextView
+                android:id="@+id/tvJobDirector"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="Director"
+                android:text="@string/job"
                 android:textColor="@color/white"
                 android:textSize="@dimen/material_text_caption"
                 android:layout_marginBottom="8dp"/>
@@ -235,7 +235,7 @@
                 android:id="@+id/tvFeatureCrewDetailMovie"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="Aulia Rahman"
+                android:text="@string/name"
                 android:textColor="@color/white"
                 android:textSize="@dimen/material_text_subhead"/>
 
@@ -243,7 +243,7 @@
                 android:id="@+id/tvJobFeatureCrewDetailMovie"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="Director"
+                android:text="@string/job"
                 android:textColor="@color/white"
                 android:textSize="@dimen/material_text_caption" />
 
@@ -262,6 +262,16 @@
             app:layout_constraintBottom_toBottomOf="@id/ivBackDropMovieDetail"
             app:layout_constraintStart_toStartOf="@id/containerFeatureCrew"
             app:layout_constraintEnd_toEndOf="@id/containerFeatureCrew"/>
+
+        <ProgressBar
+            android:id="@+id/pbDetailMovie"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:visibility="gone"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintBottom_toBottomOf="parent"/>
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 

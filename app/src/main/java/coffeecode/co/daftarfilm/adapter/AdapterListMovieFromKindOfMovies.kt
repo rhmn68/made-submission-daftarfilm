@@ -13,7 +13,8 @@ import com.bumptech.glide.Glide
 import kotlinx.android.synthetic.main.item_list_movies_from_kind_of_movies.view.*
 import java.text.DecimalFormat
 
-class AdapterListMovieFromKindOfMovies(private val context: Context, private val movieResponse: MovieResponse?, private val listener: (Movies) -> Unit)
+class AdapterListMovieFromKindOfMovies(private val context: Context, private val movieResponse: MovieResponse?,
+                                       private val listener: (Movies) -> Unit)
     : RecyclerView.Adapter<AdapterListMovieFromKindOfMovies.ViewHolder>(){
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder =
         ViewHolder(

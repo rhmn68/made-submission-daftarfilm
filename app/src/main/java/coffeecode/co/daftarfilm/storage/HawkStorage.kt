@@ -10,6 +10,7 @@ class HawkStorage (val context: Context?){
     companion object{
         const val KEY_IMAGE_CONFIG = "KEY_IMAGE_CONFIG"
         const val KEY_GENRES = "KEY_GENRES"
+        const val KEY_LANGUAGE = "KEY_LANGUAGE"
     }
 
     fun instance(){
@@ -30,6 +31,14 @@ class HawkStorage (val context: Context?){
 
     fun getGenres(): GenreResponse{
         return Hawk.get(KEY_GENRES)
+    }
+
+    fun setLanguage(language: String){
+        Hawk.put(KEY_LANGUAGE, language)
+    }
+
+    fun getLanguage(): String{
+        return Hawk.get(KEY_LANGUAGE)
     }
 
     fun deleteAll(){

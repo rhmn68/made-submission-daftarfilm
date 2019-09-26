@@ -1,21 +1,22 @@
 package coffeecode.co.daftarfilm.features.main
 
 import android.os.Bundle
-import android.util.Log
 import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.Fragment
 import coffeecode.co.daftarfilm.BuildConfig
 import coffeecode.co.daftarfilm.R
-import coffeecode.co.daftarfilm.features.main.subfeatures.home.HomeFragment
-import coffeecode.co.daftarfilm.features.main.subfeatures.movies.MoviesFragment
-import coffeecode.co.daftarfilm.features.main.subfeatures.profile.ProfileFragment
-import coffeecode.co.daftarfilm.features.main.subfeatures.search.SearchFragment
-import coffeecode.co.daftarfilm.features.main.subfeatures.tvshows.TvShowsFragment
+import coffeecode.co.daftarfilm.features.main.home.HomeFragment
+import coffeecode.co.daftarfilm.features.main.movies.MoviesFragment
+import coffeecode.co.daftarfilm.features.main.profile.ProfileFragment
+import coffeecode.co.daftarfilm.features.main.search.SearchFragment
+import coffeecode.co.daftarfilm.features.main.tvshows.TvShowsFragment
 import coffeecode.co.daftarfilm.networking.ApiServices
 import coffeecode.co.daftarfilm.storage.HawkStorage
 import com.google.android.material.bottomnavigation.BottomNavigationView
 import io.reactivex.schedulers.Schedulers
 import kotlinx.android.synthetic.main.activity_main.*
+import org.jetbrains.anko.support.v4.toast
+import java.util.*
 
 class MainActivity : AppCompatActivity() {
 
@@ -26,10 +27,25 @@ class MainActivity : AppCompatActivity() {
         setContentView(R.layout.activity_main)
 
         initHawkStorage()
+        detectLanguage()
         getConfigurationAndSaveToStorage()
         getGenresAndSaveToStorage()
         initBottomNavigation()
         openHomeFragment()
+    }
+
+    override fun onResume() {
+        super.onResume()
+        detectLanguage()
+    }
+
+    private fun detectLanguage() {
+        val language = Locale.getDefault().language
+        if (language == "in"){
+            hawkStorage.setLanguage("id")
+        }else if (language == "en"){
+            hawkStorage.setLanguage("en-US")
+        }
     }
 
     private fun initHawkStorage() {
@@ -39,7 +55,7 @@ class MainActivity : AppCompatActivity() {
 
     private fun getGenresAndSaveToStorage() {
         ApiServices.getMovieServices()
-                .getGenres(BuildConfig.TOKEN_MOVIE_DB)
+                .getGenres(BuildConfig.TOKEN_MOVIE_DB, hawkStorage.getLanguage())
                 .subscribeOn(Schedulers.io())
                 .subscribe({
                     if (it != null){
