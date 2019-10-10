@@ -46,22 +46,6 @@ class DataSource(private val context: Context) {
             })
     }
 
-    fun getDataMovieUpComing(movieApiCallback: ApiCallBack.MoviesApiCallback){
-        ApiServices.getMovieServices()
-            .getMovieUpComing(BuildConfig.TOKEN_MOVIE_DB, hawkStorage.getLanguage())
-            .subscribeOn(Schedulers.io())
-            .subscribe({
-                if (it != null){
-                    movieApiCallback.onDataLoaded(it)
-                }else{
-                    movieApiCallback.onDataEmpty()
-                }
-            },{
-                it.printStackTrace()
-                movieApiCallback.onError("${it.message}")
-            })
-    }
-
     fun getDataMovieTopRated(movieApiCallback: ApiCallBack.MoviesApiCallback){
         ApiServices.getMovieServices()
             .getMovieTopRated(BuildConfig.TOKEN_MOVIE_DB, hawkStorage.getLanguage())

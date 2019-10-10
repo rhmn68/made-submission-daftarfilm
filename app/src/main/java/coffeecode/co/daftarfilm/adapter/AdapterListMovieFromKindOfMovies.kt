@@ -52,11 +52,6 @@ class AdapterListMovieFromKindOfMovies(private val context: Context,
         holder.bindItem(this.listMovies[position],position, listener)
     }
 
-    fun updateItem(position: Int, movie: Movies){
-        this.listMovies[position] = movie
-        notifyItemChanged(position, movie)
-    }
-
     inner class ViewHolder(private val view: View): RecyclerView.ViewHolder(view){
 
         fun bindItem(
@@ -103,7 +98,7 @@ class AdapterListMovieFromKindOfMovies(private val context: Context,
             }
         }
 
-        private fun checkFavorite(movie: Movies) {
+        fun checkFavorite(movie: Movies) {
             if (movie.isFavorite!!){
                 itemView.btnFav.setImageDrawable(ContextCompat.getDrawable(context, R.drawable.ic_favorite_primary_24dp))
             }else{
@@ -140,7 +135,7 @@ class AdapterListMovieFromKindOfMovies(private val context: Context,
                     movie.isFavorite = true
                     addToDatabase(movie)
                 }
-                checkFavorite(movie)
+                notifyDataSetChanged()
             }
         }
 
@@ -158,6 +153,7 @@ class AdapterListMovieFromKindOfMovies(private val context: Context,
                             val result = movieHelper.deleteById(dataMovies[i].id.toString()).toLong()
                             if (result > 0){
                                 context.toast(context.getString(R.string.success_remove_favorite))
+                                checkFavoriteFromDb(movie)
                             }else{
                                 context.toast(context.getString(R.string.failed_remove_favorite))
                             }
@@ -175,6 +171,7 @@ class AdapterListMovieFromKindOfMovies(private val context: Context,
             val result = movieHelper.insert(values)
             if (result > 0){
                 context.toast(context.getString(R.string.success_add_favorite))
+                checkFavoriteFromDb(movie)
             }else{
                 context.toast(context.getString(R.string.failed_add_favorite))
             }

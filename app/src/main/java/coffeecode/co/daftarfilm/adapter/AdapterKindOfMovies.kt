@@ -37,8 +37,10 @@ class AdapterKindOfMovies(private val context: Context, private val movieHelper:
     }
 
     fun setData(dataKindOfMovies: List<KindOfMovies>?){
-        listKindOfMovies.clear()
         if (dataKindOfMovies != null){
+            if (listKindOfMovies.size > 0){
+                listKindOfMovies.clear()
+            }
             listKindOfMovies.addAll(dataKindOfMovies)
         }
         notifyDataSetChanged()

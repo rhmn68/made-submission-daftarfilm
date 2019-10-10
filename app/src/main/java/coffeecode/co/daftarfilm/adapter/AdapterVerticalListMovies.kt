@@ -12,11 +12,16 @@ import coffeecode.co.daftarfilm.R
 import coffeecode.co.daftarfilm.database.DatabaseContract
 import coffeecode.co.daftarfilm.database.MovieHelper
 import coffeecode.co.daftarfilm.datasource.DataSource
+import coffeecode.co.daftarfilm.helper.MappingHelper
 import coffeecode.co.daftarfilm.model.movie.Movies
 import coffeecode.co.daftarfilm.storage.HawkStorage
 import com.bumptech.glide.Glide
 import com.google.gson.Gson
 import kotlinx.android.synthetic.main.item_vertical_list_movies.view.*
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.GlobalScope
+import kotlinx.coroutines.async
+import kotlinx.coroutines.launch
 import org.jetbrains.anko.toast
 import java.text.DecimalFormat
 
@@ -33,6 +38,8 @@ class AdapterVerticalListMovies(private val context: Context,
             this.listMovies.addAll(listMovies)
             notifyDataSetChanged()
         }
+
+    private lateinit var adapterListMovieFromKindOfMovies: AdapterListMovieFromKindOfMovies
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder =
         ViewHolder(
@@ -111,6 +118,10 @@ class AdapterVerticalListMovies(private val context: Context,
         }
 
         private fun onClick(movie: Movies, position: Int) {
+            adapterListMovieFromKindOfMovies = AdapterListMovieFromKindOfMovies(context, movieHelper!!){
+
+            }
+
             itemView.btnFav.setOnClickListener {
                 if (movie.isFavorite!!){
                     movie.isFavorite = false
@@ -143,14 +154,23 @@ class AdapterVerticalListMovies(private val context: Context,
         }
 
         private fun deleteFromDatabaseById(movie: Movies) {
-            if (dataMovies?.size!! > 0){
-                for (i in dataMovies.indices){
-                    if (dataMovies[i].movies?.id == movie.id){
-                        val result = movieHelper?.deleteById(dataMovies[i].id.toString())?.toLong()
-                        if (result!! > 0){
-                            context.toast("Berhasil menghapus favorite")
-                        }else{
-                            context.toast("Gagal menghapus favorite")
+            GlobalScope.launch(Dispatchers.Main) {
+                val movies = async(Dispatchers.IO) {
+                    val cursor = movieHelper?.queryAll()
+                    MappingHelper.mapCursorMovieToArrayList(cursor)
+                }
+                val dataMovies = movies.await()
+
+                if (dataMovies.size > 0){
+                    for (i in dataMovies.indices){
+                        if (dataMovies[i].movies?.id == movie.id){
+                            val result = movieHelper?.deleteById(dataMovies[i].id.toString())?.toLong()
+                            if (result!! > 0){
+                                context.toast(context.getString(R.string.success_remove_favorite))
+                                checkFavoriteFromDb(movie)
+                            }else{
+                                context.toast(context.getString(R.string.failed_remove_favorite))
+                            }
                         }
                     }
                 }
@@ -164,9 +184,9 @@ class AdapterVerticalListMovies(private val context: Context,
 
             val result = movieHelper?.insert(values)
             if (result!! > 0){
-                context.toast("Berhasil menambah favorite")
+                context.toast(context.getString(R.string.success_add_favorite))
             }else{
-                context.toast("Gagal menambah favorite")
+                context.toast(context.getString(R.string.failed_add_favorite))
             }
         }
     }

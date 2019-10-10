@@ -1,6 +1,7 @@
 package coffeecode.co.daftarfilm.repo
 
 import android.content.Context
+import android.util.Log
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import coffeecode.co.daftarfilm.R
@@ -100,6 +101,8 @@ class MovieRepo(val context: Context) {
             }
 
         })
+
+        Log.d("coba", "data : ${listKindOfMovies.size}")
 
         return dataKindOfMoviesForHome
     }
