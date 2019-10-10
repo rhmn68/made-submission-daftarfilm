@@ -8,6 +8,7 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.PagerSnapHelper
 import androidx.recyclerview.widget.RecyclerView
 import coffeecode.co.daftarfilm.R
+import coffeecode.co.daftarfilm.database.MovieHelper
 import coffeecode.co.daftarfilm.features.detail.MovieDetailActivity
 import coffeecode.co.daftarfilm.features.seeall.SeeAllActivity
 import coffeecode.co.daftarfilm.model.kindofmovies.KindOfMovies
@@ -15,7 +16,7 @@ import coffeecode.co.daftarfilm.model.movie.MovieResponse
 import kotlinx.android.synthetic.main.item_kind_of_movies.view.*
 import org.jetbrains.anko.startActivity
 
-class AdapterKindOfMovies(private val context: Context)
+class AdapterKindOfMovies(private val context: Context, private val movieHelper: MovieHelper)
     : RecyclerView.Adapter<AdapterKindOfMovies.ViewHolder>(){
 
     private val listKindOfMovies = mutableListOf<KindOfMovies>()
@@ -32,7 +33,7 @@ class AdapterKindOfMovies(private val context: Context)
     override fun getItemCount(): Int = listKindOfMovies.size
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
-        holder.bindItem(context, listKindOfMovies[position])
+        holder.bindItem(context, listKindOfMovies[position], movieHelper)
     }
 
     fun setData(dataKindOfMovies: List<KindOfMovies>?){
@@ -49,20 +50,22 @@ class AdapterKindOfMovies(private val context: Context)
 
         fun bindItem(
             context: Context,
-            itemKindOfMovies: KindOfMovies
+            itemKindOfMovies: KindOfMovies,
+            movieHelper: MovieHelper
         ) {
             itemView.tvTittleKindOfMovies.text = itemKindOfMovies.tittle
 
-            setAdapterListMoviesFromKindOfMovies(itemKindOfMovies.movieResponse, context)
+            setAdapterListMoviesFromKindOfMovies(itemKindOfMovies.movieResponse, context, movieHelper)
             onClick(context, itemKindOfMovies)
         }
 
         private fun setAdapterListMoviesFromKindOfMovies(
             movieResponse: MovieResponse?,
-            context: Context
+            context: Context,
+            movieHelper: MovieHelper
         ) {
             adapterListMovieFromKindOfMovies =
-                AdapterListMovieFromKindOfMovies(context, movieResponse) {
+                AdapterListMovieFromKindOfMovies(context, movieHelper) {
                     if (it.originalTitle != null){
                         context.startActivity<MovieDetailActivity>(
                             MovieDetailActivity.KEY_MOVIE_RESPONSE to it,
@@ -74,10 +77,11 @@ class AdapterKindOfMovies(private val context: Context)
                     }
 
                 }
-            adapterListMovieFromKindOfMovies.notifyDataSetChanged()
+            adapterListMovieFromKindOfMovies.listMovies = movieResponse?.movies!!
 
             itemView.rvListMoviesFromKindOfMovies.layoutManager = LinearLayoutManager(context, LinearLayoutManager.HORIZONTAL, false)
             itemView.rvListMoviesFromKindOfMovies.adapter = adapterListMovieFromKindOfMovies
+
             snapHelper.attachToRecyclerView(itemView.rvListMoviesFromKindOfMovies)
         }
 

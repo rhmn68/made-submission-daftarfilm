@@ -6,16 +6,13 @@ import androidx.fragment.app.Fragment
 import coffeecode.co.daftarfilm.BuildConfig
 import coffeecode.co.daftarfilm.R
 import coffeecode.co.daftarfilm.features.main.home.HomeFragment
-import coffeecode.co.daftarfilm.features.main.movies.MoviesFragment
 import coffeecode.co.daftarfilm.features.main.profile.ProfileFragment
-import coffeecode.co.daftarfilm.features.main.search.SearchFragment
-import coffeecode.co.daftarfilm.features.main.tvshows.TvShowsFragment
+import coffeecode.co.daftarfilm.features.main.favorite.FavoriteFragment
 import coffeecode.co.daftarfilm.networking.ApiServices
 import coffeecode.co.daftarfilm.storage.HawkStorage
 import com.google.android.material.bottomnavigation.BottomNavigationView
 import io.reactivex.schedulers.Schedulers
 import kotlinx.android.synthetic.main.activity_main.*
-import org.jetbrains.anko.support.v4.toast
 import java.util.*
 
 class MainActivity : AppCompatActivity() {
@@ -103,16 +100,8 @@ class MainActivity : AppCompatActivity() {
                     openFragment(HomeFragment())
                     return@OnNavigationItemSelectedListener true
                 }
-                R.id.action_search -> {
-                    openFragment(SearchFragment())
-                    return@OnNavigationItemSelectedListener true
-                }
-                R.id.action_movies -> {
-                    openFragment(MoviesFragment())
-                    return@OnNavigationItemSelectedListener true
-                }
-                R.id.action_tv_shows -> {
-                    openFragment(TvShowsFragment())
+                R.id.action_favorite -> {
+                    openFragment(FavoriteFragment())
                     return@OnNavigationItemSelectedListener true
                 }
                 R.id.action_profile -> {

@@ -33,21 +33,6 @@ class MovieViewModel(application: Application) : AndroidViewModel(application) {
         return dataKindOfMoviesForHome
     }
 
-    fun getDataKindOfMoviesForTvShows(): LiveData<List<KindOfMovies>>?{
-        if (dataKindOfMoviesForTvShows == null){
-            dataKindOfMoviesForTvShows = movieRepo.getDataKindOfMoviesForTvShows()
-        }
-
-        return dataKindOfMoviesForTvShows
-    }
-
-    fun getDataKindOfMoviesForMovies(): LiveData<List<KindOfMovies>>?{
-        if (dataKindOfMoviesForMovies == null){
-            dataKindOfMoviesForMovies = movieRepo.getDataKindOfMoviesForMovies()
-        }
-        return dataKindOfMoviesForMovies
-    }
-
     fun getErrorMessage(): LiveData<String>?{
         if (errorMessage == null){
             errorMessage = movieRepo.getErrorMessage()

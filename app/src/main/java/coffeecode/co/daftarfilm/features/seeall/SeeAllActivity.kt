@@ -7,8 +7,10 @@ import androidx.lifecycle.ViewModelProviders
 import androidx.recyclerview.widget.LinearLayoutManager
 import coffeecode.co.daftarfilm.R
 import coffeecode.co.daftarfilm.adapter.AdapterVerticalListMovies
+import coffeecode.co.daftarfilm.database.MovieHelper
 import coffeecode.co.daftarfilm.features.detail.MovieDetailActivity
 import coffeecode.co.daftarfilm.model.movie.MovieResponse
+import coffeecode.co.daftarfilm.model.movie.Movies
 import coffeecode.co.daftarfilm.viewmodel.SeeAllViewModel
 import kotlinx.android.synthetic.main.activity_see_all.*
 import org.jetbrains.anko.startActivity
@@ -78,21 +80,27 @@ class SeeAllActivity : AppCompatActivity() {
     }
 
     private fun setAdapterMovie(movieResponse: MovieResponse) {
-        adapterVerticalListMovies = AdapterVerticalListMovies(this, movieResponse){
-            if (it.originalTitle != null){
-                startActivity<MovieDetailActivity>(
-                    MovieDetailActivity.KEY_MOVIE_RESPONSE to it,
-                    MovieDetailActivity.KEY_IS_MOVIE to true)
-            }else{
-                startActivity<MovieDetailActivity>(
-                    MovieDetailActivity.KEY_MOVIE_RESPONSE to it,
-                    MovieDetailActivity.KEY_IS_MOVIE to false)
-            }
-        }
-        adapterVerticalListMovies.notifyDataSetChanged()
+        val movieHelper = MovieHelper.getInstance(this)
+        movieHelper.open()
 
-        rvSeeAll.layoutManager = LinearLayoutManager(this)
-        rvSeeAll.adapter = adapterVerticalListMovies
+        if (movieResponse.movies != null){
+            adapterVerticalListMovies = AdapterVerticalListMovies(this){
+                if (it.originalTitle != null){
+                    startActivity<MovieDetailActivity>(
+                        MovieDetailActivity.KEY_MOVIE_RESPONSE to it,
+                        MovieDetailActivity.KEY_IS_MOVIE to true)
+                }else{
+                    startActivity<MovieDetailActivity>(
+                        MovieDetailActivity.KEY_MOVIE_RESPONSE to it,
+                        MovieDetailActivity.KEY_IS_MOVIE to false)
+                }
+            }
+            adapterVerticalListMovies.addMovieHelper(movieHelper)
+            adapterVerticalListMovies.listMovies = movieResponse.movies!!
+
+            rvSeeAll.layoutManager = LinearLayoutManager(this)
+            rvSeeAll.adapter = adapterVerticalListMovies
+        }
     }
 
     private fun initToolbar(tittle: String?) {

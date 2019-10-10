@@ -4,10 +4,14 @@ import android.content.Context
 import coffeecode.co.daftarfilm.BuildConfig
 import coffeecode.co.daftarfilm.networking.ApiServices
 import coffeecode.co.daftarfilm.apicallback.ApiCallBack
+import coffeecode.co.daftarfilm.database.MovieHelper
+import coffeecode.co.daftarfilm.helper.MappingHelper
+import coffeecode.co.daftarfilm.model.movie.Movies
+import coffeecode.co.daftarfilm.model.moviedb.MovieDbModel
 import coffeecode.co.daftarfilm.storage.HawkStorage
 import io.reactivex.schedulers.Schedulers
 
-class DataSource(context: Context) {
+class DataSource(private val context: Context) {
     private val hawkStorage = HawkStorage(context)
 
     fun getDataNowPlaying(movieApiCallback: ApiCallBack.MoviesApiCallback){
@@ -216,5 +220,15 @@ class DataSource(context: Context) {
                 it.printStackTrace()
                 apiCallback.onError("${it.message}")
             })
+    }
+
+    fun getAllDataMovieFromSql(): ArrayList<MovieDbModel>?{
+        val movieHelper = MovieHelper.getInstance(context)
+        movieHelper.open()
+
+        val cursor = movieHelper.queryAll()
+
+
+        return MappingHelper.mapCursorMovieToArrayList(cursor)
     }
 }

@@ -215,24 +215,26 @@ class MovieDetailActivity : AppCompatActivity(){
     private fun initYoutubeView(videoResponse: VideoResponse) {
         fragYoutube = supportFragmentManager.findFragmentById(R.id.youtubeView) as YouTubePlayerSupportFragment
 
-        fragYoutube.initialize(Config.YOUTUBE_API_KEY, object : YouTubePlayer.OnInitializedListener{
-            override fun onInitializationSuccess(provider: YouTubePlayer.Provider?, player: YouTubePlayer?, wasRestored: Boolean) {
-                if(!wasRestored){
-                    if (videoResponse.results!!.isNotEmpty()){
-                        player?.cueVideo(videoResponse.results[0]?.key)
+        if (videoResponse.results != null){
+            fragYoutube.initialize(Config.YOUTUBE_API_KEY, object : YouTubePlayer.OnInitializedListener{
+                override fun onInitializationSuccess(provider: YouTubePlayer.Provider?, player: YouTubePlayer?, wasRestored: Boolean) {
+                    if(!wasRestored){
+                        if (videoResponse.results.isNotEmpty()){
+                            player?.cueVideo(videoResponse.results[0]?.key)
+                        }
                     }
                 }
-            }
 
-            override fun onInitializationFailure(provider: YouTubePlayer.Provider?, errorReason: YouTubeInitializationResult?) {
-                if (errorReason!!.isUserRecoverableError) {
-                    errorReason.getErrorDialog(this@MovieDetailActivity, RECOVERY_REQUEST).show()
-                } else {
-                    toast("Error youtube")
+                override fun onInitializationFailure(provider: YouTubePlayer.Provider?, errorReason: YouTubeInitializationResult?) {
+                    if (errorReason!!.isUserRecoverableError) {
+                        errorReason.getErrorDialog(this@MovieDetailActivity, RECOVERY_REQUEST).show()
+                    } else {
+                        toast("Error youtube")
+                    }
                 }
-            }
 
-        })
+            })
+        }
     }
 
     private fun setAdapterCast(creditsResponse: CreditsResponse?) {

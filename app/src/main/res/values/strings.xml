@@ -37,4 +37,9 @@
 
     <string name="movie">Movie</string>
     <string name="television">Television</string>
+
+    <string name="success_remove_favorite">Success remove favorite</string>
+    <string name="failed_remove_favorite">Failed remove favorite</string>
+    <string name="success_add_favorite">Success add favorite</string>
+    <string name="failed_add_favorite">Failed add favorite</string>
 </resources>

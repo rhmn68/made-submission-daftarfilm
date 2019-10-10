@@ -8,24 +8,13 @@
     android:focusable="true"
     android:background="@color/colorPrimary"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    tools:context=".features.main.search.SearchFragment">
-
-    <androidx.appcompat.widget.SearchView
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        style="@style/Widget.AppCompat.SearchView.ActionBar"
-        android:background="@drawable/bg_rounded_white_30dp"
-        app:queryHint="@string/search_movie_or_tv_shows"
-        app:iconifiedByDefault="false"
-        android:elevation="@dimen/main_elevation"
-        android:layout_margin="@dimen/main_margin"/>
+    tools:context=".features.main.favorite.FavoriteFragment">
 
     <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/rvFavMovie"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:paddingStart="@dimen/main_padding"
-        android:paddingEnd="@dimen/main_padding"
-        android:paddingBottom="@dimen/main_padding"
+        android:padding="@dimen/main_padding"
         android:clipToPadding="false"
         tools:listitem="@layout/item_vertical_list_movies"/>
 

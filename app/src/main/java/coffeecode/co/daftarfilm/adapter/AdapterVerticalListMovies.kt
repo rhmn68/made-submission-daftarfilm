@@ -1,22 +1,39 @@
 package coffeecode.co.daftarfilm.adapter
 
+import android.content.ContentValues
 import android.content.Context
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.core.content.ContextCompat
 import androidx.recyclerview.widget.RecyclerView
 import coffeecode.co.daftarfilm.R
-import coffeecode.co.daftarfilm.model.movie.MovieResponse
+import coffeecode.co.daftarfilm.database.DatabaseContract
+import coffeecode.co.daftarfilm.database.MovieHelper
+import coffeecode.co.daftarfilm.datasource.DataSource
 import coffeecode.co.daftarfilm.model.movie.Movies
 import coffeecode.co.daftarfilm.storage.HawkStorage
 import com.bumptech.glide.Glide
+import com.google.gson.Gson
 import kotlinx.android.synthetic.main.item_vertical_list_movies.view.*
+import org.jetbrains.anko.toast
 import java.text.DecimalFormat
 
 class AdapterVerticalListMovies(private val context: Context,
-                                private val movieResponse: MovieResponse?,
                                 private val listener: (Movies) -> Unit)
     : RecyclerView.Adapter<AdapterVerticalListMovies.ViewHolder>(){
+
+    private var movieHelper: MovieHelper? = null
+    var listMovies = ArrayList<Movies?>()
+        set(listMovies){
+            if (listMovies.size > 0){
+                this.listMovies.clear()
+            }
+            this.listMovies.addAll(listMovies)
+            notifyDataSetChanged()
+        }
+
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder =
         ViewHolder(
             LayoutInflater.from(
@@ -24,16 +41,29 @@ class AdapterVerticalListMovies(private val context: Context,
             ).inflate(R.layout.item_vertical_list_movies, parent, false)
         )
 
-    override fun getItemCount(): Int = movieResponse?.movies!!.size
+    override fun getItemCount(): Int = this.listMovies.size
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
-        holder.bindItem(context, movieResponse?.movies?.get(position), listener)
+        holder.bindItem(context, this.listMovies[position], position , listener)
     }
 
-    class ViewHolder(private val view: View): RecyclerView.ViewHolder(view){
+    fun addMovieHelper(movieHelper: MovieHelper){
+        this.movieHelper = movieHelper
+    }
+
+    fun removeItem(position: Int){
+        this.listMovies.removeAt(position)
+        notifyItemRemoved(position)
+        notifyItemRangeChanged(position, this.listMovies.size)
+    }
+
+    inner class ViewHolder(private val view: View): RecyclerView.ViewHolder(view){
+        private val dataMovies = DataSource(context).getAllDataMovieFromSql()
+
         fun bindItem(
             context: Context,
             movie: Movies?,
+            position: Int,
             listener: (Movies) -> Unit
         ) {
             val hawkStorage = HawkStorage(context)
@@ -73,7 +103,70 @@ class AdapterVerticalListMovies(private val context: Context,
 
                 itemView.tvVoteCount.text = movie.voteCount.toString()
 
+                checkFavoriteFromDb(movie)
+                checkFavorite(movie)
+                onClick(movie, position)
                 view.setOnClickListener { listener(movie) }
+            }
+        }
+
+        private fun onClick(movie: Movies, position: Int) {
+            itemView.btnFav.setOnClickListener {
+                if (movie.isFavorite!!){
+                    movie.isFavorite = false
+                    deleteFromDatabaseById(movie)
+                    removeItem(position)
+                }else{
+                    movie.isFavorite = true
+                    addToDatabase(movie)
+                }
+                checkFavorite(movie)
+            }
+        }
+
+        private fun checkFavoriteFromDb(movie: Movies) {
+            if (dataMovies?.size!! > 0){
+                for (i in dataMovies.indices){
+                    if (dataMovies[i].movies?.id == movie.id){
+                        movie.isFavorite = dataMovies[i].movies?.isFavorite
+                    }
+                }
+            }
+        }
+
+        private fun checkFavorite(movie: Movies) {
+            if (movie.isFavorite!!){
+                itemView.btnFav.setImageDrawable(ContextCompat.getDrawable(context, R.drawable.ic_favorite_primary_24dp))
+            }else{
+                itemView.btnFav.setImageDrawable(ContextCompat.getDrawable(context, R.drawable.ic_favorite_border_primary_24dp))
+            }
+        }
+
+        private fun deleteFromDatabaseById(movie: Movies) {
+            if (dataMovies?.size!! > 0){
+                for (i in dataMovies.indices){
+                    if (dataMovies[i].movies?.id == movie.id){
+                        val result = movieHelper?.deleteById(dataMovies[i].id.toString())?.toLong()
+                        if (result!! > 0){
+                            context.toast("Berhasil menghapus favorite")
+                        }else{
+                            context.toast("Gagal menghapus favorite")
+                        }
+                    }
+                }
+            }
+        }
+
+        private fun addToDatabase(movie: Movies){
+            val values = ContentValues()
+            val movieString = Gson().toJson(movie)
+            values.put(DatabaseContract.MovieColumns.MOVIE_RESPONSE, movieString)
+
+            val result = movieHelper?.insert(values)
+            if (result!! > 0){
+                context.toast("Berhasil menambah favorite")
+            }else{
+                context.toast("Gagal menambah favorite")
             }
         }
     }

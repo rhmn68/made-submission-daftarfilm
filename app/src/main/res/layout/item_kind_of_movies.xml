@@ -25,6 +25,7 @@
         android:textSize="@dimen/material_text_body1"
         android:textColor="@color/colorPrimaryDark"
         android:layout_marginEnd="@dimen/main_margin"
+        android:visibility="gone"
         app:layout_constraintTop_toTopOf="@id/tvTittleKindOfMovies"
         app:layout_constraintBottom_toBottomOf="@id/tvTittleKindOfMovies"
         app:layout_constraintEnd_toEndOf="parent"/>

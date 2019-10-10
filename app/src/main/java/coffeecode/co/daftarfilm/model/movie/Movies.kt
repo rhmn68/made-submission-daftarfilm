@@ -51,7 +51,9 @@ data class Movies(
 	val adult: Boolean? = null,
 
 	@field:SerializedName("vote_count")
-	val voteCount: Int? = null
+	val voteCount: Int? = null,
+
+	var isFavorite: Boolean? = false
 ): Serializable{
 	fun movieRate(): Float{
 		return voteAverage?.toFloat()!! / 2

@@ -38,4 +38,8 @@
 
     <string name="movie">Film</string>
     <string name="television">Televisi</string>
+    <string name="success_remove_favorite">Berhasil menghapus favorite</string>
+    <string name="failed_remove_favorite">Gagal menghapus favorite</string>
+    <string name="success_add_favorite">Berhasil menambah favorite</string>
+    <string name="failed_add_favorite">Gagal menambah favorite</string>
 </resources>

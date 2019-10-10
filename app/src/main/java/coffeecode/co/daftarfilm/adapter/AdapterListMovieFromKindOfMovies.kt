@@ -1,21 +1,44 @@
 package coffeecode.co.daftarfilm.adapter
 
+import android.content.ContentValues
 import android.content.Context
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.core.content.ContextCompat
 import androidx.recyclerview.widget.RecyclerView
 import coffeecode.co.daftarfilm.R
-import coffeecode.co.daftarfilm.model.movie.MovieResponse
+import coffeecode.co.daftarfilm.database.DatabaseContract
+import coffeecode.co.daftarfilm.database.MovieHelper
+import coffeecode.co.daftarfilm.datasource.DataSource
+import coffeecode.co.daftarfilm.helper.MappingHelper
 import coffeecode.co.daftarfilm.model.movie.Movies
 import coffeecode.co.daftarfilm.storage.HawkStorage
 import com.bumptech.glide.Glide
+import com.google.gson.Gson
 import kotlinx.android.synthetic.main.item_list_movies_from_kind_of_movies.view.*
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.GlobalScope
+import kotlinx.coroutines.async
+import kotlinx.coroutines.launch
+import org.jetbrains.anko.toast
 import java.text.DecimalFormat
 
-class AdapterListMovieFromKindOfMovies(private val context: Context, private val movieResponse: MovieResponse?,
+class AdapterListMovieFromKindOfMovies(private val context: Context,
+                                       private val movieHelper: MovieHelper,
                                        private val listener: (Movies) -> Unit)
     : RecyclerView.Adapter<AdapterListMovieFromKindOfMovies.ViewHolder>(){
+
+    var listMovies = ArrayList<Movies?>()
+        set(listMovies){
+            if (this.listMovies.size > 0){
+                this.listMovies.clear()
+            }
+            this.listMovies.addAll(listMovies)
+            notifyDataSetChanged()
+        }
+
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder =
         ViewHolder(
             LayoutInflater.from(
@@ -23,16 +46,22 @@ class AdapterListMovieFromKindOfMovies(private val context: Context, private val
             ).inflate(R.layout.item_list_movies_from_kind_of_movies, parent, false)
         )
 
-    override fun getItemCount(): Int = movieResponse?.movies!!.size
+    override fun getItemCount(): Int = this.listMovies.size
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
-        holder.bindItem(context, movieResponse?.movies?.get(position), listener)
+        holder.bindItem(this.listMovies[position],position, listener)
     }
 
-    class ViewHolder(private val view: View): RecyclerView.ViewHolder(view){
+    fun updateItem(position: Int, movie: Movies){
+        this.listMovies[position] = movie
+        notifyItemChanged(position, movie)
+    }
+
+    inner class ViewHolder(private val view: View): RecyclerView.ViewHolder(view){
+
         fun bindItem(
-            context: Context,
             movie: Movies?,
+            position: Int,
             listener: (Movies) -> Unit
         ) {
             val hawkStorage = HawkStorage(context)
@@ -68,7 +97,86 @@ class AdapterListMovieFromKindOfMovies(private val context: Context, private val
                     }
                 }
 
+                checkFavoriteFromDb(movie)
+                onClick(movie, position)
                 view.setOnClickListener { listener(movie) }
+            }
+        }
+
+        private fun checkFavorite(movie: Movies) {
+            if (movie.isFavorite!!){
+                itemView.btnFav.setImageDrawable(ContextCompat.getDrawable(context, R.drawable.ic_favorite_primary_24dp))
+            }else{
+                itemView.btnFav.setImageDrawable(ContextCompat.getDrawable(context, R.drawable.ic_favorite_border_primary_24dp))
+            }
+        }
+
+        private fun checkFavoriteFromDb(movie: Movies) {
+            GlobalScope.launch(Dispatchers.Main) {
+                val movies = async(Dispatchers.IO) {
+                    val cursor = movieHelper.queryAll()
+                    MappingHelper.mapCursorMovieToArrayList(cursor)
+                }
+                val dataMovies = movies.await()
+                if (dataMovies.size > 0){
+                    for (i in dataMovies.indices){
+                        if (dataMovies[i].movies?.id == movie.id){
+                            movie.isFavorite = dataMovies[i].movies?.isFavorite
+                            checkFavorite(movie)
+                        }
+                    }
+                }else{
+                    checkFavorite(movie)
+                }
+            }
+        }
+
+        private fun onClick(movie: Movies, position: Int) {
+            itemView.btnFav.setOnClickListener {
+                if (movie.isFavorite!!){
+                    movie.isFavorite = false
+                    deleteFromDatabaseById(movie, position)
+                }else{
+                    movie.isFavorite = true
+                    addToDatabase(movie)
+                }
+                checkFavorite(movie)
+            }
+        }
+
+        private fun deleteFromDatabaseById(movie: Movies, position: Int) {
+            GlobalScope.launch(Dispatchers.Main) {
+                val movies = async(Dispatchers.IO) {
+                    val cursor = movieHelper.queryAll()
+                    MappingHelper.mapCursorMovieToArrayList(cursor)
+                }
+                val dataMovies = movies.await()
+
+                if (dataMovies.size > 0){
+                    for (i in dataMovies.indices){
+                        if (dataMovies[i].movies?.id == movie.id){
+                            val result = movieHelper.deleteById(dataMovies[i].id.toString()).toLong()
+                            if (result > 0){
+                                context.toast(context.getString(R.string.success_remove_favorite))
+                            }else{
+                                context.toast(context.getString(R.string.failed_remove_favorite))
+                            }
+                        }
+                    }
+                }
+            }
+        }
+
+        private fun addToDatabase(movie: Movies){
+            val values = ContentValues()
+            val movieString = Gson().toJson(movie)
+            values.put(DatabaseContract.MovieColumns.MOVIE_RESPONSE, movieString)
+
+            val result = movieHelper.insert(values)
+            if (result > 0){
+                context.toast(context.getString(R.string.success_add_favorite))
+            }else{
+                context.toast(context.getString(R.string.failed_add_favorite))
             }
         }
     }
