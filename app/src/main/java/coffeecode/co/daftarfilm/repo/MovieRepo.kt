@@ -20,14 +20,11 @@ class MovieRepo(val context: Context) {
     private val errorMessage = MutableLiveData<String>()
 
     fun getDataKindOfMoviesForHome(): LiveData<List<KindOfMovies>>?{
-        val listKindOfMovies = mutableListOf<KindOfMovies>()
         isLoading.postValue(true)
 
-        //Get data movie popular
-        dataSource.getDataMoviePopular(object : ApiCallBack.MoviesApiCallback{
-            override fun onDataLoaded(movieResponse: MovieResponse) {
+        dataSource.getDataMoviesAndTv(object : ApiCallBack.DataMovieAndTvApiCallback{
+            override fun onDataLoaded(listKindOfMovies: List<KindOfMovies>) {
                 isLoading.postValue(false)
-                listKindOfMovies.add(KindOfMovies(context.resources.getString(R.string.movie_popular),movieResponse))
                 dataKindOfMoviesForHome.postValue(listKindOfMovies)
             }
 
@@ -42,67 +39,6 @@ class MovieRepo(val context: Context) {
             }
 
         })
-
-        //Get data movie
-        dataSource.getDataMovieTopRated(object : ApiCallBack.MoviesApiCallback{
-            override fun onDataLoaded(movieResponse: MovieResponse) {
-                isLoading.postValue(false)
-                listKindOfMovies.add(KindOfMovies(context.getString(R.string.movie_top_rated),movieResponse))
-                dataKindOfMoviesForHome.postValue(listKindOfMovies)
-            }
-
-            override fun onDataEmpty() {
-                isLoading.postValue(false)
-                dataKindOfMoviesForHome.postValue(null)
-            }
-
-            override fun onError(message: String) {
-                isLoading.postValue(false)
-                errorMessage.postValue(message)
-            }
-        })
-
-        // Get data tv popular
-        dataSource.getDataTvPopular(object : ApiCallBack.MoviesApiCallback{
-            override fun onDataLoaded(movieResponse: MovieResponse) {
-                isLoading.postValue(false)
-                listKindOfMovies.add(KindOfMovies(context.getString(R.string.tv_popular),movieResponse))
-                dataKindOfMoviesForHome.postValue(listKindOfMovies)
-            }
-
-            override fun onDataEmpty() {
-                isLoading.postValue(false)
-                dataKindOfMoviesForHome.postValue(null)
-            }
-
-            override fun onError(message: String) {
-                isLoading.postValue(false)
-                errorMessage.postValue(message)
-            }
-
-        })
-
-        //Get data tv top rated
-        dataSource.getDataTvTopRated(object : ApiCallBack.MoviesApiCallback{
-            override fun onDataLoaded(movieResponse: MovieResponse) {
-                isLoading.postValue(false)
-                listKindOfMovies.add(KindOfMovies(context.getString(R.string.tv_top_rated),movieResponse))
-                dataKindOfMoviesForHome.postValue(listKindOfMovies)
-            }
-
-            override fun onDataEmpty() {
-                isLoading.postValue(false)
-                dataKindOfMoviesForHome.postValue(null)
-            }
-
-            override fun onError(message: String) {
-                isLoading.postValue(false)
-                errorMessage.postValue(message)
-            }
-
-        })
-
-        Log.d("coba", "data : ${listKindOfMovies.size}")
 
         return dataKindOfMoviesForHome
     }

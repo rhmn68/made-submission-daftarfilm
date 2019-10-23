@@ -1,8 +1,10 @@
 package coffeecode.co.daftarfilm.model.movie
 
+import android.os.Parcelable
 import com.google.gson.annotations.SerializedName
-import java.io.Serializable
+import kotlinx.android.parcel.Parcelize
 
+@Parcelize
 data class Dates(
 
 	@field:SerializedName("maximum")
@@ -10,4 +12,4 @@ data class Dates(
 
 	@field:SerializedName("minimum")
 	val minimum: String? = null
-): Serializable
+): Parcelable

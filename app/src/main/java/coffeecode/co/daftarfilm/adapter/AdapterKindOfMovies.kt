@@ -10,9 +10,7 @@ import androidx.recyclerview.widget.RecyclerView
 import coffeecode.co.daftarfilm.R
 import coffeecode.co.daftarfilm.database.MovieHelper
 import coffeecode.co.daftarfilm.features.detail.MovieDetailActivity
-import coffeecode.co.daftarfilm.features.seeall.SeeAllActivity
 import coffeecode.co.daftarfilm.model.kindofmovies.KindOfMovies
-import coffeecode.co.daftarfilm.model.movie.MovieResponse
 import kotlinx.android.synthetic.main.item_kind_of_movies.view.*
 import org.jetbrains.anko.startActivity
 
@@ -57,12 +55,11 @@ class AdapterKindOfMovies(private val context: Context, private val movieHelper:
         ) {
             itemView.tvTittleKindOfMovies.text = itemKindOfMovies.tittle
 
-            setAdapterListMoviesFromKindOfMovies(itemKindOfMovies.movieResponse, context, movieHelper)
-            onClick(context, itemKindOfMovies)
+            setAdapterListMoviesFromKindOfMovies(itemKindOfMovies, context, movieHelper)
         }
 
         private fun setAdapterListMoviesFromKindOfMovies(
-            movieResponse: MovieResponse?,
+            itemKindOfMovies: KindOfMovies,
             context: Context,
             movieHelper: MovieHelper
         ) {
@@ -79,24 +76,12 @@ class AdapterKindOfMovies(private val context: Context, private val movieHelper:
                     }
 
                 }
-            adapterListMovieFromKindOfMovies.listMovies = movieResponse?.movies!!
+            adapterListMovieFromKindOfMovies.setData(itemKindOfMovies)
 
             itemView.rvListMoviesFromKindOfMovies.layoutManager = LinearLayoutManager(context, LinearLayoutManager.HORIZONTAL, false)
             itemView.rvListMoviesFromKindOfMovies.adapter = adapterListMovieFromKindOfMovies
 
             snapHelper.attachToRecyclerView(itemView.rvListMoviesFromKindOfMovies)
-        }
-
-        private fun onClick(
-            context: Context,
-            itemKindOfMovies: KindOfMovies
-        ) {
-            itemView.tvSeeAllKindOfMovies.setOnClickListener {
-                context.startActivity<SeeAllActivity>(
-                    SeeAllActivity.KEY_TITTLE to itemKindOfMovies.tittle,
-                    SeeAllActivity.KEY_MOVIE_RESPONSE to itemKindOfMovies.movieResponse
-                )
-            }
         }
     }
 }

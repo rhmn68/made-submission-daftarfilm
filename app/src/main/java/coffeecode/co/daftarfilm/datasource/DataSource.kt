@@ -2,13 +2,16 @@ package coffeecode.co.daftarfilm.datasource
 
 import android.content.Context
 import coffeecode.co.daftarfilm.BuildConfig
-import coffeecode.co.daftarfilm.networking.ApiServices
 import coffeecode.co.daftarfilm.apicallback.ApiCallBack
 import coffeecode.co.daftarfilm.database.MovieHelper
 import coffeecode.co.daftarfilm.helper.MappingHelper
-import coffeecode.co.daftarfilm.model.movie.Movies
+import coffeecode.co.daftarfilm.model.kindofmovies.KindOfMovies
+import coffeecode.co.daftarfilm.model.movie.MovieResponse
 import coffeecode.co.daftarfilm.model.moviedb.MovieDbModel
+import coffeecode.co.daftarfilm.networking.ApiServices
 import coffeecode.co.daftarfilm.storage.HawkStorage
+import io.reactivex.Observable
+import io.reactivex.functions.Function4
 import io.reactivex.schedulers.Schedulers
 
 class DataSource(private val context: Context) {
@@ -81,22 +84,6 @@ class DataSource(private val context: Context) {
     fun getDataTvTopRated(movieApiCallback: ApiCallBack.MoviesApiCallback){
         ApiServices.getTvShowsServices()
             .getTvTopRated(BuildConfig.TOKEN_MOVIE_DB, hawkStorage.getLanguage())
-            .subscribeOn(Schedulers.io())
-            .subscribe({
-                if (it != null){
-                    movieApiCallback.onDataLoaded(it)
-                }else{
-                    movieApiCallback.onDataEmpty()
-                }
-            },{
-                it.printStackTrace()
-                movieApiCallback.onError("${it.message}")
-            })
-    }
-
-    fun getDataTvDiscover(movieApiCallback: ApiCallBack.MoviesApiCallback){
-        ApiServices.getTvShowsServices()
-            .getTvDiscover(BuildConfig.TOKEN_MOVIE_DB, hawkStorage.getLanguage())
             .subscribeOn(Schedulers.io())
             .subscribe({
                 if (it != null){
@@ -206,13 +193,46 @@ class DataSource(private val context: Context) {
             })
     }
 
-    fun getAllDataMovieFromSql(): ArrayList<MovieDbModel>?{
-        val movieHelper = MovieHelper.getInstance(context)
-        movieHelper.open()
+    fun getDataMoviesAndTv(apiCallback: ApiCallBack.DataMovieAndTvApiCallback) {
+        val movieTopRated = ApiServices.getMovieServices()
+            .getMovieTopRated(BuildConfig.TOKEN_MOVIE_DB, hawkStorage.getLanguage())
+            .subscribeOn(Schedulers.newThread())
+        val tvTopRated = ApiServices.getTvShowsServices()
+            .getTvTopRated(BuildConfig.TOKEN_MOVIE_DB, hawkStorage.getLanguage())
+            .subscribeOn(Schedulers.newThread())
+        val moviePopular = ApiServices.getMovieServices()
+                .getMoviePopular(BuildConfig.TOKEN_MOVIE_DB, hawkStorage.getLanguage())
+                .subscribeOn(Schedulers.newThread())
+        val tvPopular =  ApiServices.getTvShowsServices()
+                .getTvPopular(BuildConfig.TOKEN_MOVIE_DB, hawkStorage.getLanguage())
+                .subscribeOn(Schedulers.newThread())
 
-        val cursor = movieHelper.queryAll()
+        Observable.zip(
+                moviePopular,
+                movieTopRated,
+                tvPopular,
+                tvTopRated,
+                Function4<MovieResponse, MovieResponse, MovieResponse, MovieResponse, List<KindOfMovies>>{
+                    t1, t2, t3, t4 ->
+                    val listKindOfMovies = ArrayList<KindOfMovies>()
+                    listKindOfMovies.add(KindOfMovies("Movie Popular", t1, KindOfMovies.TYPE_MOVIE))
+                    listKindOfMovies.add(KindOfMovies("Movie Top Rated", t2, KindOfMovies.TYPE_MOVIE))
+                    listKindOfMovies.add(KindOfMovies("Tv Popular", t3, KindOfMovies.TYPE_TV))
+                    listKindOfMovies.add(KindOfMovies("Tv Top Rated", t4, KindOfMovies.TYPE_TV))
+                    return@Function4 listKindOfMovies
+                })
+                .subscribeOn(Schedulers.io())
+                .subscribe({
+                    if (it != null){
+                        apiCallback.onDataLoaded(it)
+                    }else{
+                        apiCallback.onDataEmpty()
+                    }
+                },{
+                    apiCallback.onError("${it.message}")
+                })
 
 
-        return MappingHelper.mapCursorMovieToArrayList(cursor)
     }
+
 }

@@ -2,6 +2,7 @@ package coffeecode.co.daftarfilm.apicallback
 
 import coffeecode.co.daftarfilm.model.credits.CreditsResponse
 import coffeecode.co.daftarfilm.model.detail.MovieDetailResponse
+import coffeecode.co.daftarfilm.model.kindofmovies.KindOfMovies
 import coffeecode.co.daftarfilm.model.movie.MovieResponse
 import coffeecode.co.daftarfilm.model.tvdetail.TvDetailResponse
 import coffeecode.co.daftarfilm.model.video.VideoResponse
@@ -33,6 +34,12 @@ interface ApiCallBack {
 
     interface TvDetailCallback{
         fun onDataLoaded(response: TvDetailResponse)
+        fun onDataEmpty()
+        fun onError(message: String)
+    }
+
+    interface DataMovieAndTvApiCallback{
+        fun onDataLoaded(listKindOfMovies: List<KindOfMovies>)
         fun onDataEmpty()
         fun onError(message: String)
     }

@@ -50,7 +50,7 @@ class MovieDetailActivity : AppCompatActivity(){
     }
 
     private fun getDataIntent() {
-        val movie = intent.getSerializableExtra(KEY_MOVIE_RESPONSE) as Movies
+        val movie = intent.getParcelableExtra(KEY_MOVIE_RESPONSE) as Movies
         val isMovie = intent.getBooleanExtra(KEY_IS_MOVIE, false)
 
         if (isMovie){

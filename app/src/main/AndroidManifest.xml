@@ -12,9 +12,6 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
         <activity
-            android:name=".features.seeall.SeeAllActivity"
-            android:theme="@style/AppTheme.NoActionBar"/>
-        <activity
             android:name=".features.detail.MovieDetailActivity"
             android:theme="@style/AppTheme.NoActionBar" />
         <activity

@@ -2,7 +2,6 @@ package coffeecode.co.daftarfilm.features.main.home
 
 
 import android.os.Bundle
-import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
@@ -18,18 +17,11 @@ import coffeecode.co.daftarfilm.adapter.AdapterKindOfMovies
 import coffeecode.co.daftarfilm.database.MovieHelper
 import coffeecode.co.daftarfilm.datasource.DataSource
 import coffeecode.co.daftarfilm.features.detail.MovieDetailActivity
-import coffeecode.co.daftarfilm.helper.MappingHelper
 import coffeecode.co.daftarfilm.viewmodel.MovieViewModel
 import coffeecode.co.daftarfilm.model.kindofmovies.KindOfMovies
 import coffeecode.co.daftarfilm.model.movie.MovieResponse
 import kotlinx.android.synthetic.main.fragment_home.*
-import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.GlobalScope
-import kotlinx.coroutines.async
-import kotlinx.coroutines.launch
 import org.jetbrains.anko.support.v4.startActivity
-import org.jetbrains.anko.support.v4.toast
-import java.util.*
 
 class HomeFragment : Fragment() {
 
@@ -40,22 +32,32 @@ class HomeFragment : Fragment() {
     private var movieViewModel: MovieViewModel? = null
     private lateinit var movieHelper: MovieHelper
 
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+        initDatabase()
+    }
+
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? =
         inflater.inflate(R.layout.fragment_home, container, false)
 
-    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
-        super.onViewCreated(view, savedInstanceState)
+    override fun onActivityCreated(savedInstanceState: Bundle?) {
+        super.onActivityCreated(savedInstanceState)
         initSwipeRefreshHome()
-        initDatabase()
         getAllDataHomeViewModel()
     }
 
     private fun initDatabase() {
         movieHelper = MovieHelper.getInstance(activity!!)
+        movieHelper.open()
     }
 
-    override fun onDestroy() {
-        super.onDestroy()
+    override fun onResume() {
+        super.onResume()
+        initDatabase()
+    }
+
+    override fun onDetach() {
+        super.onDetach()
         movieHelper.close()
     }
 
@@ -97,7 +99,6 @@ class HomeFragment : Fragment() {
     }
 
     private fun setAdapterKindOfMovies(listKindOfMovies: List<KindOfMovies>) {
-        movieHelper.open()
         adapterKindOfMovies = AdapterKindOfMovies(activity!!, movieHelper)
         adapterKindOfMovies.setData(listKindOfMovies)
 

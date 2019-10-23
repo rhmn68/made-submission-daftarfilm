@@ -19,4 +19,5 @@
     <dimen name="material_text_title">20sp</dimen>
     <dimen name="material_text_headline">24sp</dimen>
     <dimen name="material_text_display1">34sp</dimen>
+    <!-- Default screen margins, per the Android Design guidelines. -->
 </resources>

@@ -10,6 +10,8 @@ import coffeecode.co.daftarfilm.model.detail.MovieDetailResponse
 import coffeecode.co.daftarfilm.model.genres.GenreResponse
 import coffeecode.co.daftarfilm.model.movie.MovieResponse
 import coffeecode.co.daftarfilm.model.video.VideoResponse
+import io.reactivex.Single
+import retrofit2.Call
 import retrofit2.http.Path
 
 interface MovieApiServices{
@@ -37,7 +39,7 @@ interface MovieApiServices{
 
     @GET("movie/upcoming")
     fun getMovieUpComing(@Query("api_key") apiKey: String?,
-                         @Query("language") language: String?): Observable<MovieResponse>
+                         @Query("language") language: String?): Single<MovieResponse>
 
     @GET("movie/top_rated")
     fun getMovieTopRated(@Query("api_key") apiKey: String?,

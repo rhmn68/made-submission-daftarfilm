@@ -28,16 +28,5 @@ class ProfileFragment : Fragment() {
             startActivity(mIntent)
         }
 
-        btnNotifications.setOnClickListener {
-            toast("Notifications")
-        }
-
-        btnSettings.setOnClickListener {
-            toast("Settings")
-        }
-
-        btnInfo.setOnClickListener {
-            toast("Info")
-        }
     }
 }

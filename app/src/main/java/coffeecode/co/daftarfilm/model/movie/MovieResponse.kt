@@ -1,8 +1,10 @@
 package coffeecode.co.daftarfilm.model.movie
 
+import android.os.Parcelable
 import com.google.gson.annotations.SerializedName
-import java.io.Serializable
+import kotlinx.android.parcel.Parcelize
 
+@Parcelize
 data class MovieResponse(
 
 	@field:SerializedName("dates")
@@ -15,8 +17,8 @@ data class MovieResponse(
 	val totalPages: Int? = null,
 
 	@field:SerializedName("results")
-    var movies: ArrayList<Movies?>? = null,
+    var movies: List<Movies?>? = null,
 
 	@field:SerializedName("total_results")
 	val totalResults: Int? = null
-): Serializable
+): Parcelable

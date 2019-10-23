@@ -2,70 +2,77 @@ package coffeecode.co.daftarfilm.features.main.favorite
 
 
 import android.os.Bundle
-import androidx.fragment.app.Fragment
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import androidx.recyclerview.widget.LinearLayoutManager
-
+import androidx.fragment.app.Fragment
 import coffeecode.co.daftarfilm.R
-import coffeecode.co.daftarfilm.adapter.AdapterVerticalListMovies
-import coffeecode.co.daftarfilm.database.MovieHelper
-import coffeecode.co.daftarfilm.datasource.DataSource
-import coffeecode.co.daftarfilm.features.detail.MovieDetailActivity
-import coffeecode.co.daftarfilm.model.movie.MovieResponse
-import coffeecode.co.daftarfilm.model.movie.Movies
+import com.google.android.material.tabs.TabLayout
 import kotlinx.android.synthetic.main.fragment_favorite.*
-import org.jetbrains.anko.startActivity
-import org.jetbrains.anko.support.v4.toast
+import kotlinx.android.synthetic.main.fragment_favorite.view.*
 
 class FavoriteFragment : Fragment() {
 
-    private lateinit var adapterVerticalListMovies: AdapterVerticalListMovies
-    private lateinit var movieHelper: MovieHelper
+    companion object{
+        private const val KEY_POSITION_TAB = "KEY_POSITION_TAB"
+    }
+
+    private var positionTab = 0
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? =
         inflater.inflate(R.layout.fragment_favorite, container, false)
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        initDatabase()
-        setAdapterSearchMovie()
-    }
 
-    private fun initDatabase() {
-        movieHelper = MovieHelper.getInstance(activity!!)
-    }
-
-    override fun onDestroy() {
-        super.onDestroy()
-        movieHelper.close()
-    }
-
-    private fun setAdapterSearchMovie() {
-        movieHelper.open()
-        val dataMovies = DataSource(activity!!).getAllDataMovieFromSql()
-        val listMovie = ArrayList<Movies?>()
-        for (i in dataMovies?.indices!!){
-            dataMovies[i].movies?.let { listMovie.add(it) }
+        initTabLayout()
+        if (savedInstanceState == null){
+            openMovieFragment()
+        }else{
+            val position = savedInstanceState.getInt(KEY_POSITION_TAB)
+            tabLayoutFavorite.getTabAt(position)?.select()
         }
-        adapterVerticalListMovies = AdapterVerticalListMovies(activity!!) {
-            if (it.originalTitle != null){
-                context?.startActivity<MovieDetailActivity>(
-                    MovieDetailActivity.KEY_MOVIE_RESPONSE to it,
-                    MovieDetailActivity.KEY_IS_MOVIE to true)
-            }else{
-                context?.startActivity<MovieDetailActivity>(
-                    MovieDetailActivity.KEY_MOVIE_RESPONSE to it,
-                    MovieDetailActivity.KEY_IS_MOVIE to false)
+    }
+
+    override fun onSaveInstanceState(outState: Bundle) {
+        super.onSaveInstanceState(outState)
+        outState.putInt(KEY_POSITION_TAB, positionTab)
+    }
+
+    private fun openMovieFragment() {
+        tabLayoutFavorite.getTabAt(0)?.select()
+    }
+
+    private fun initTabLayout() {
+
+        tabLayoutFavorite.addOnTabSelectedListener(object : TabLayout.OnTabSelectedListener{
+            override fun onTabReselected(tab: TabLayout.Tab?) {
+                when(tab?.position){
+                    0 -> openFragment(FavoriteMovieFragment())
+                    1 -> openFragment(FavoriteTvFragment())
+                    else -> openFragment(FavoriteMovieFragment())
+                }
             }
-        }
-        adapterVerticalListMovies.listMovies = listMovie
-        adapterVerticalListMovies.addMovieHelper(movieHelper)
-        adapterVerticalListMovies.notifyDataSetChanged()
 
-        rvFavMovie.layoutManager = LinearLayoutManager(activity)
-        rvFavMovie.adapter = adapterVerticalListMovies
+            override fun onTabUnselected(p0: TabLayout.Tab?) {}
+
+            override fun onTabSelected(tab: TabLayout.Tab?) {
+                when(tab?.position){
+                    0 -> openFragment(FavoriteMovieFragment())
+                    1 -> openFragment(FavoriteTvFragment())
+                    else -> openFragment(FavoriteMovieFragment())
+                }
+                positionTab = tab?.position!!
+            }
+
+        })
     }
 
+    private fun openFragment(fragment: Fragment) {
+        val transaction = fragmentManager?.beginTransaction()
+        transaction?.replace(R.id.fragment, fragment, fragment::class.java.simpleName)
+        transaction?.addToBackStack(fragment::class.java.simpleName)
+        transaction?.commit()
+    }
 }

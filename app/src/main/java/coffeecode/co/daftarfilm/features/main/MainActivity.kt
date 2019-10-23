@@ -1,7 +1,10 @@
 package coffeecode.co.daftarfilm.features.main
 
 import android.os.Bundle
+import android.os.PersistableBundle
+import android.util.Log
 import androidx.appcompat.app.AppCompatActivity
+import androidx.core.view.get
 import androidx.fragment.app.Fragment
 import coffeecode.co.daftarfilm.BuildConfig
 import coffeecode.co.daftarfilm.R
@@ -17,7 +20,12 @@ import java.util.*
 
 class MainActivity : AppCompatActivity() {
 
+    private companion object{
+        private val ID_NAVIGATION = "ID_NAVIGATION"
+    }
+
     private lateinit var hawkStorage: HawkStorage
+    private var idNavigation: Int = 0
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -28,12 +36,22 @@ class MainActivity : AppCompatActivity() {
         getConfigurationAndSaveToStorage()
         getGenresAndSaveToStorage()
         initBottomNavigation()
-        openHomeFragment()
+        if (savedInstanceState == null){
+            openHomeFragment()
+        }else{
+            val id = savedInstanceState.getInt(ID_NAVIGATION)
+            btmNavigationMain.selectedItemId = id
+        }
     }
 
     override fun onResume() {
         super.onResume()
         detectLanguage()
+    }
+
+    override fun onSaveInstanceState(outState: Bundle) {
+        super.onSaveInstanceState(outState)
+        outState.putInt(ID_NAVIGATION, idNavigation)
     }
 
     private fun detectLanguage() {
@@ -109,6 +127,8 @@ class MainActivity : AppCompatActivity() {
                     return@OnNavigationItemSelectedListener true
                 }
             }
+            Log.d("coba", "id : ${it.itemId}")
+            idNavigation = it.itemId
             return@OnNavigationItemSelectedListener true
         })
     }

@@ -5,7 +5,6 @@
     <string name="home">Rumah</string>
     <string name="search">Pencarian</string>
     <string name="movies">Film</string>
-    <string name="tv_shows">Pertunjukan TV</string>
     <string name="profile">Profil</string>
 
     <string name="lorem_ipsum">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nam tempor ut eros id dictum. Maecenas eget lectus tincidunt, hendrerit dolor nec, aliquet nisi. Praesent mattis lobortis elit ac dignissim. </string>
@@ -16,30 +15,19 @@
     <string name="featured_crew">Kru Unggulan</string>
     <string name="overview">Gambaran</string>
     <string name="cast">Pemeran</string>
-    <string name="full_name">Nama Lengkap</string>
-    <string name="hello">Halo</string>
-    <string name="notifications">Notifikasi</string>
-    <string name="settings">Pengaturan</string>
-    <string name="info">Info</string>
     <string name="job">Pekerjaan</string>
     <string name="name">Nama</string>
     <string name="release">Melepaskan</string>
     <string name="example_year">(2016)</string>
     <string name="change_language">Ganti Bahasa</string>
-    <string name="search_movie_or_tv_shows">Cari film atau pertunjukan tv</string>
-
-    <string name="movie_up_coming">Film Mendatang</string>
-    <string name="movie_popular">Film Populer</string>
-    <string name="movie_top_rated">Nilai Tertinggi Film</string>
-    <string name="tv_popular">TV Populer</string>
-    <string name="tv_top_rated">TV Nilai Tertinggi</string>
-    <string name="tv_discover">Temukan TV</string>
-    <string name="movie_now_playing">Film Sedang Diputar</string>
 
     <string name="movie">Film</string>
     <string name="television">Televisi</string>
     <string name="success_remove_favorite">Berhasil menghapus favorite</string>
     <string name="failed_remove_favorite">Gagal menghapus favorite</string>
-    <string name="success_add_favorite">Berhasil menambah favorite</string>
-    <string name="failed_add_favorite">Gagal menambah favorite</string>
+    <string name="success_add_tv_favorite">Berhasil menambah favorite</string>
+    <string name="failed_add_tv_favorite">Gagal menambah favorite</string>
+
+    <string name="success_add_movie_favorite">Success add movie favorite</string>
+    <string name="failed_add_movie_favorite">Failed add movie favorite</string>
 </resources>

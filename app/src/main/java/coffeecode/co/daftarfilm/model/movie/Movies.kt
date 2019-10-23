@@ -1,8 +1,10 @@
 package coffeecode.co.daftarfilm.model.movie
 
+import android.os.Parcelable
 import com.google.gson.annotations.SerializedName
-import java.io.Serializable
+import kotlinx.android.parcel.Parcelize
 
+@Parcelize
 data class Movies(
 
 	@field:SerializedName("overview")
@@ -45,7 +47,7 @@ data class Movies(
 	val voteAverage: Double? = null,
 
 	@field:SerializedName("id")
-	val id: Int? = null,
+    var id: Int? = null,
 
 	@field:SerializedName("adult")
 	val adult: Boolean? = null,
@@ -54,7 +56,7 @@ data class Movies(
 	val voteCount: Int? = null,
 
 	var isFavorite: Boolean? = false
-): Serializable{
+): Parcelable{
 	fun movieRate(): Float{
 		return voteAverage?.toFloat()!! / 2
 	}

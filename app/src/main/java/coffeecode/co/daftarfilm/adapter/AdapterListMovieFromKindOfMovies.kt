@@ -11,9 +11,10 @@ import androidx.recyclerview.widget.RecyclerView
 import coffeecode.co.daftarfilm.R
 import coffeecode.co.daftarfilm.database.DatabaseContract
 import coffeecode.co.daftarfilm.database.MovieHelper
-import coffeecode.co.daftarfilm.datasource.DataSource
 import coffeecode.co.daftarfilm.helper.MappingHelper
+import coffeecode.co.daftarfilm.model.kindofmovies.KindOfMovies
 import coffeecode.co.daftarfilm.model.movie.Movies
+import coffeecode.co.daftarfilm.model.moviedb.MovieDbModel
 import coffeecode.co.daftarfilm.storage.HawkStorage
 import com.bumptech.glide.Glide
 import com.google.gson.Gson
@@ -30,14 +31,8 @@ class AdapterListMovieFromKindOfMovies(private val context: Context,
                                        private val listener: (Movies) -> Unit)
     : RecyclerView.Adapter<AdapterListMovieFromKindOfMovies.ViewHolder>(){
 
-    var listMovies = ArrayList<Movies?>()
-        set(listMovies){
-            if (this.listMovies.size > 0){
-                this.listMovies.clear()
-            }
-            this.listMovies.addAll(listMovies)
-            notifyDataSetChanged()
-        }
+    private var listMovies = ArrayList<Movies?>()
+    private var itemKindOfMovies: KindOfMovies? = null
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder =
         ViewHolder(
@@ -49,17 +44,31 @@ class AdapterListMovieFromKindOfMovies(private val context: Context,
     override fun getItemCount(): Int = this.listMovies.size
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
-        holder.bindItem(this.listMovies[position],position, listener)
+        holder.bindItem(listMovies[position], listener, itemKindOfMovies, position)
+    }
+
+    fun setData(itemKindOfMovies: KindOfMovies){
+        val dataMovies = itemKindOfMovies.movieResponse?.movies
+        if (dataMovies != null) {
+            if (listMovies.size > 0){
+                listMovies.clear()
+            }
+            listMovies.addAll(dataMovies)
+            this.itemKindOfMovies = itemKindOfMovies
+        }
+        notifyDataSetChanged()
     }
 
     inner class ViewHolder(private val view: View): RecyclerView.ViewHolder(view){
+        private val hawkStorage = HawkStorage(context)
 
         fun bindItem(
             movie: Movies?,
-            position: Int,
-            listener: (Movies) -> Unit
+            listener: (Movies) -> Unit,
+            itemKindOfMovies: KindOfMovies?,
+            position: Int
         ) {
-            val hawkStorage = HawkStorage(context)
+
             val secureBaseUrl = hawkStorage.getImageConfig().images?.secureBaseUrl
             val posterSize = hawkStorage.getImageConfig().images?.posterSizes?.get(1)
 
@@ -71,78 +80,137 @@ class AdapterListMovieFromKindOfMovies(private val context: Context,
                 Glide.with(view).load(urlImagePoster).into(itemView.ivMovie)
                 itemView.ratingBarKindOfMovie.rating = movie.movieRate()
                 itemView.tvTotalRating.text = decimalFormat.format(movie.movieRate())
+                setReleaseDate(movie)
+                setTitleMovie(movie)
+                setGenres(movie)
+                checkMovieOrTv(movie, itemKindOfMovies, position)
 
-                if (movie.releaseDate != null){
-                    itemView.tvReleaseDate.text = movie.releaseDate
-                }else{
-                    itemView.tvReleaseDate.text = movie.firstAirDate
-                }
-
-                if (movie.originalTitle != null){
-                    itemView.tvTittleMovie.text = movie.originalTitle
-                }else{
-                    itemView.tvTittleMovie.text = movie.originalName
-                }
-
-                for (element in movie.genreIds!!){
-                    for (j in hawkStorage.getGenres().genres!!.indices){
-                        if (hawkStorage.getGenres().genres!![j]?.id == element){
-                            itemView.tvGenre.text = hawkStorage.getGenres().genres!![j]?.name
-                        }
-                    }
-                }
-
-                checkFavoriteFromDb(movie)
-                onClick(movie, position)
                 view.setOnClickListener { listener(movie) }
             }
         }
 
-        fun checkFavorite(movie: Movies) {
-            if (movie.isFavorite!!){
-                itemView.btnFav.setImageDrawable(ContextCompat.getDrawable(context, R.drawable.ic_favorite_primary_24dp))
+        private fun checkMovieOrTv(movie: Movies, itemKindOfMovies: KindOfMovies?, position: Int) {
+            if (itemKindOfMovies?.typeMovie == KindOfMovies.TYPE_MOVIE){
+                checkFavoriteMovieFromDb(movie, position)
+                onClickMovie(movie)
             }else{
-                itemView.btnFav.setImageDrawable(ContextCompat.getDrawable(context, R.drawable.ic_favorite_border_primary_24dp))
+                checkFavoriteTvFromDb(movie, position)
+                onClickTv(movie)
             }
         }
 
-        private fun checkFavoriteFromDb(movie: Movies) {
-            GlobalScope.launch(Dispatchers.Main) {
-                val movies = async(Dispatchers.IO) {
-                    val cursor = movieHelper.queryAll()
-                    MappingHelper.mapCursorMovieToArrayList(cursor)
+        private fun setGenres(movie: Movies) {
+            for (element in movie.genreIds!!){
+                for (j in hawkStorage.getGenres().genres!!.indices){
+                    if (hawkStorage.getGenres().genres!![j]?.id == element){
+                        itemView.tvGenre.text = hawkStorage.getGenres().genres!![j]?.name
+                    }
                 }
-                val dataMovies = movies.await()
-                if (dataMovies.size > 0){
-                    for (i in dataMovies.indices){
-                        if (dataMovies[i].movies?.id == movie.id){
-                            movie.isFavorite = dataMovies[i].movies?.isFavorite
-                            checkFavorite(movie)
+            }
+        }
+
+        private fun setTitleMovie(movie: Movies) {
+            if (movie.originalTitle != null){
+                itemView.tvTittleMovie.text = movie.originalTitle
+            }else{
+                itemView.tvTittleMovie.text = movie.originalName
+            }
+        }
+
+        private fun setReleaseDate(movie: Movies) {
+            if (movie.releaseDate != null){
+                itemView.tvReleaseDate.text = movie.releaseDate
+            }else{
+                itemView.tvReleaseDate.text = movie.firstAirDate
+            }
+        }
+
+        private fun showFavoriteButton(){
+            itemView.btnFav.setImageDrawable(ContextCompat.getDrawable(context, R.drawable.ic_favorite_primary_24dp))
+        }
+
+        private fun showNotFavoriteButton(){
+            itemView.btnFav.setImageDrawable(ContextCompat.getDrawable(context, R.drawable.ic_favorite_border_primary_24dp))
+        }
+
+        private fun checkFavorite(movie: Movies) {
+            if (movie.isFavorite!!){
+                showFavoriteButton()
+            }else{
+                showNotFavoriteButton()
+            }
+        }
+
+        private fun checkFavoriteTvFromDb(movie: Movies, position: Int) {
+            GlobalScope.launch(Dispatchers.Main) {
+                val tv = async(Dispatchers.IO) {
+                    val cursor = movieHelper.queryAllTv()
+                    MappingHelper.mapCursorTvToArrayList(cursor)
+                }
+                val dataTv = tv.await()
+                if (dataTv.size > 0){
+                    for (dataDbTv: MovieDbModel in dataTv){
+                        if (dataDbTv.movies?.id == movie.id && dataDbTv.movies?.isFavorite == true){
+                            listMovies[position]?.isFavorite = true
+                            showFavoriteButton()
                         }
                     }
                 }else{
-                    checkFavorite(movie)
+                    showNotFavoriteButton()
                 }
             }
         }
 
-        private fun onClick(movie: Movies, position: Int) {
+        private fun checkFavoriteMovieFromDb(movie: Movies, position: Int) {
+            GlobalScope.launch(Dispatchers.Main) {
+                val movies = async(Dispatchers.IO) {
+                    val cursor = movieHelper.queryAllMovie()
+                    MappingHelper.mapCursorMovieToArrayList(cursor)
+                }
+                val dataMovies = movies.await()
+                if (dataMovies.size > 0){
+                    for (dataDbMovie: MovieDbModel in dataMovies){
+                        if (dataDbMovie.movies?.id == movie.id && dataDbMovie.movies?.isFavorite == true){
+                            listMovies[position]?.isFavorite = true
+                            showFavoriteButton()
+                        }
+                    }
+                }else{
+                    showNotFavoriteButton()
+                }
+            }
+        }
+
+        private fun onClickMovie(movie: Movies) {
             itemView.btnFav.setOnClickListener {
                 if (movie.isFavorite!!){
                     movie.isFavorite = false
-                    deleteFromDatabaseById(movie, position)
+                    deleteFromDatabaseMovieById(movie)
                 }else{
                     movie.isFavorite = true
-                    addToDatabase(movie)
+                    addToMovieDatabase(movie)
                 }
-                notifyDataSetChanged()
+                checkFavorite(movie)
             }
         }
 
-        private fun deleteFromDatabaseById(movie: Movies, position: Int) {
+        private fun onClickTv(movie: Movies) {
+            itemView.btnFav.setOnClickListener {
+                if (movie.isFavorite!!){
+                    movie.isFavorite = false
+                    deleteFromDatabaseTvById(movie)
+                }else{
+                    movie.isFavorite = true
+                    addToTvDatabase(movie)
+                }
+                checkFavorite(movie)
+            }
+        }
+
+        private fun deleteFromDatabaseMovieById(movie: Movies) {
             GlobalScope.launch(Dispatchers.Main) {
                 val movies = async(Dispatchers.IO) {
-                    val cursor = movieHelper.queryAll()
+                    val cursor = movieHelper.queryAllMovie()
                     MappingHelper.mapCursorMovieToArrayList(cursor)
                 }
                 val dataMovies = movies.await()
@@ -150,10 +218,9 @@ class AdapterListMovieFromKindOfMovies(private val context: Context,
                 if (dataMovies.size > 0){
                     for (i in dataMovies.indices){
                         if (dataMovies[i].movies?.id == movie.id){
-                            val result = movieHelper.deleteById(dataMovies[i].id.toString()).toLong()
+                            val result = movieHelper.deleteMovieById(dataMovies[i].id.toString()).toLong()
                             if (result > 0){
                                 context.toast(context.getString(R.string.success_remove_favorite))
-                                checkFavoriteFromDb(movie)
                             }else{
                                 context.toast(context.getString(R.string.failed_remove_favorite))
                             }
@@ -163,17 +230,51 @@ class AdapterListMovieFromKindOfMovies(private val context: Context,
             }
         }
 
-        private fun addToDatabase(movie: Movies){
+        private fun deleteFromDatabaseTvById(movie: Movies) {
+            GlobalScope.launch(Dispatchers.Main) {
+                val tv = async(Dispatchers.IO) {
+                    val cursor = movieHelper.queryAllTv()
+                    MappingHelper.mapCursorTvToArrayList(cursor)
+                }
+                val dataTv = tv.await()
+                if (dataTv.size > 0){
+                    for (dataDbTv: MovieDbModel in dataTv){
+                        if (dataDbTv.movies?.id == movie.id){
+                            val result = movieHelper.deleteTvById(dataDbTv.id.toString()).toLong()
+                            if (result > 0){
+                                context.toast(context.getString(R.string.success_remove_favorite))
+                            }else{
+                                context.toast(context.getString(R.string.failed_remove_favorite))
+                            }
+                        }
+                    }
+                }
+            }
+        }
+
+        private fun addToMovieDatabase(movie: Movies){
             val values = ContentValues()
             val movieString = Gson().toJson(movie)
             values.put(DatabaseContract.MovieColumns.MOVIE_RESPONSE, movieString)
 
-            val result = movieHelper.insert(values)
+            val result = movieHelper.insertMovie(values)
             if (result > 0){
-                context.toast(context.getString(R.string.success_add_favorite))
-                checkFavoriteFromDb(movie)
+                context.toast(context.getString(R.string.success_add_movie_favorite))
             }else{
-                context.toast(context.getString(R.string.failed_add_favorite))
+                context.toast(context.getString(R.string.failed_add_movie_favorite))
+            }
+        }
+
+        private fun addToTvDatabase(movie: Movies){
+            val values = ContentValues()
+            val tvString = Gson().toJson(movie)
+            values.put(DatabaseContract.MovieColumns.TV_RESPONSE, tvString)
+
+            val result = movieHelper.insertTv(values)
+            if (result > 0){
+                context.toast(context.getString(R.string.success_add_tv_favorite))
+            }else{
+                context.toast(context.getString(R.string.failed_add_tv_favorite))
             }
         }
     }
