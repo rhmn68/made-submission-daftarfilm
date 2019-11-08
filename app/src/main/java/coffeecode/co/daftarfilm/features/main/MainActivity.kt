@@ -21,7 +21,7 @@ import java.util.*
 class MainActivity : AppCompatActivity() {
 
     private companion object{
-        private val ID_NAVIGATION = "ID_NAVIGATION"
+        private const val ID_NAVIGATION = "ID_NAVIGATION"
     }
 
     private lateinit var hawkStorage: HawkStorage
