@@ -3,18 +3,15 @@ package coffeecode.co.daftarfilm.datasource
 import android.content.Context
 import coffeecode.co.daftarfilm.BuildConfig
 import coffeecode.co.daftarfilm.apicallback.ApiCallBack
-import coffeecode.co.daftarfilm.database.MovieHelper
-import coffeecode.co.daftarfilm.helper.MappingHelper
 import coffeecode.co.daftarfilm.model.kindofmovies.KindOfMovies
 import coffeecode.co.daftarfilm.model.movie.MovieResponse
-import coffeecode.co.daftarfilm.model.moviedb.MovieDbModel
 import coffeecode.co.daftarfilm.networking.ApiServices
 import coffeecode.co.daftarfilm.storage.HawkStorage
 import io.reactivex.Observable
 import io.reactivex.functions.Function4
 import io.reactivex.schedulers.Schedulers
 
-class DataSource(private val context: Context) {
+class DataSource(context: Context) {
     private val hawkStorage = HawkStorage(context)
 
     fun getDataNowPlaying(movieApiCallback: ApiCallBack.MoviesApiCallback){

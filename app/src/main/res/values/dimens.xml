@@ -8,6 +8,7 @@
 
     <!--margin-->
     <dimen name="main_margin">16dp</dimen>
+    <dimen name="large_margin">32dp</dimen>
 
     <!--padding-->
     <dimen name="main_padding">16dp</dimen>

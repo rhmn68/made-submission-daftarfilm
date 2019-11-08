@@ -38,100 +38,102 @@
                 app:layout_constraintTop_toTopOf="parent"
                 app:layout_constraintBottom_toBottomOf="@id/ivPosterBlurMovieDetail"/>
 
+            <TextView
+                android:id="@+id/textViewRelease"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/release"
+                android:textColor="@color/white"
+                android:textSize="@dimen/material_text_headline"
+                android:layout_marginTop="@dimen/large_margin"
+                android:layout_marginStart="@dimen/main_margin"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"/>
 
-            <LinearLayout
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/example_year"
+                android:textColor="@color/white"
+                android:textSize="@dimen/material_text_title"
+                app:layout_constraintStart_toEndOf="@id/textViewRelease"
+                app:layout_constraintTop_toTopOf="@id/textViewRelease"
+                app:layout_constraintBottom_toBottomOf="@id/textViewRelease"/>
+
+            <TextView
+                android:id="@+id/tvTittleDetailMovie"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/tittle"
+                android:maxLines="2"
+                android:ellipsize="end"
+                android:textSize="@dimen/material_text_display1"
+                android:textColor="@color/white"
+                android:layout_marginStart="@dimen/main_margin"
+                android:layout_marginEnd="@dimen/main_margin"
+                app:layout_constraintTop_toBottomOf="@id/textViewRelease"
+                app:layout_constraintStart_toStartOf="parent"/>
+
+            <fragment
+                android:id="@+id/youtubeView"
                 android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:orientation="vertical"
-                android:paddingTop="@dimen/main_padding"
-                android:paddingBottom="@dimen/main_padding">
+                android:layout_height="250dp"
+                android:name="com.google.android.youtube.player.YouTubePlayerSupportFragment"
+                android:layout_marginTop="@dimen/main_margin"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/tvTittleDetailMovie"/>
 
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:orientation="horizontal"
-                    android:layout_marginStart="@dimen/main_margin"
-                    android:layout_marginEnd="@dimen/main_margin"
-                    android:layout_marginTop="@dimen/main_margin">
+            <TextView
+                android:id="@+id/textViewOverview"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="@string/overview"
+                android:textColor="@color/white"
+                android:textSize="@dimen/material_text_subhead"
+                android:layout_marginStart="@dimen/main_margin"
+                android:layout_marginEnd="@dimen/main_margin"
+                android:layout_marginTop="@dimen/main_margin"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/youtubeView"/>
 
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="@string/release"
-                        android:textColor="@color/white"
-                        android:textSize="@dimen/material_text_headline"/>
+            <TextView
+                android:id="@+id/tvOverviewDetailMovie"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:textColor="@color/white"
+                android:textSize="@dimen/material_text_body1"
+                android:layout_marginTop="8dp"
+                android:layout_marginStart="@dimen/main_margin"
+                android:layout_marginEnd="@dimen/main_margin"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/textViewOverview"/>
 
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="@string/example_year"
-                        android:textColor="@color/white"
-                        android:textSize="@dimen/material_text_title"/>
+            <TextView
+                android:id="@+id/textViewCast"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/cast"
+                android:textColor="@color/white"
+                android:textSize="@dimen/material_text_subhead"
+                android:layout_marginTop="@dimen/main_margin"
+                android:layout_marginStart="@dimen/main_margin"
+                android:layout_marginEnd="@dimen/main_margin"
+                app:layout_constraintTop_toBottomOf="@id/tvOverviewDetailMovie"
+                app:layout_constraintStart_toStartOf="parent"/>
 
-                </LinearLayout>
-
-                <TextView
-                    android:id="@+id/tvTittleDetailMovie"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="@string/tittle"
-                    android:maxLines="2"
-                    android:ellipsize="end"
-                    android:textSize="@dimen/material_text_display1"
-                    android:textColor="@color/white"
-                    android:layout_marginStart="@dimen/main_margin"
-                    android:layout_marginEnd="@dimen/main_margin"/>
-
-                <fragment
-                    android:id="@+id/youtubeView"
-                    android:layout_width="match_parent"
-                    android:layout_height="250dp"
-                    android:name="com.google.android.youtube.player.YouTubePlayerSupportFragment"
-                    android:layout_marginTop="@dimen/main_margin"/>
-
-                <TextView
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:text="@string/overview"
-                    android:textColor="@color/white"
-                    android:textSize="@dimen/material_text_subhead"
-                    android:layout_marginStart="@dimen/main_margin"
-                    android:layout_marginEnd="@dimen/main_margin"
-                    android:layout_marginTop="@dimen/main_margin"/>
-
-                <TextView
-                    android:id="@+id/tvOverviewDetailMovie"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:textColor="@color/white"
-                    android:textSize="@dimen/material_text_body1"
-                    android:layout_marginTop="8dp"
-                    android:layout_marginStart="@dimen/main_margin"
-                    android:layout_marginEnd="@dimen/main_margin"/>
-
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="@string/cast"
-                    android:textColor="@color/white"
-                    android:textSize="@dimen/material_text_subhead"
-                    android:layout_marginTop="@dimen/main_margin"
-                    android:layout_marginStart="@dimen/main_margin"
-                    android:layout_marginEnd="@dimen/main_margin"/>
-
-                <androidx.recyclerview.widget.RecyclerView
-                    android:id="@+id/rvCast"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:orientation="horizontal"
-                    app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
-                    android:layout_marginTop="8dp"
-                    android:paddingStart="@dimen/main_padding"
-                    android:paddingEnd="@dimen/main_padding"
-                    android:clipToPadding="false"
-                    tools:listitem="@layout/item_cast"/>
-
-            </LinearLayout>
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/rvCast"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+                android:layout_marginTop="8dp"
+                android:paddingStart="@dimen/main_padding"
+                android:paddingEnd="@dimen/main_padding"
+                android:clipToPadding="false"
+                tools:listitem="@layout/item_cast"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/textViewCast"/>
 
         </androidx.constraintlayout.widget.ConstraintLayout>
 
@@ -202,7 +204,7 @@
             app:layout_constraintStart_toEndOf="@id/ivPosterDetailMovie"
             app:layout_constraintEnd_toEndOf="parent" />
 
-        <LinearLayout
+        <androidx.constraintlayout.widget.ConstraintLayout
             android:id="@+id/containerFeatureCrew"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
@@ -216,20 +218,26 @@
 
             <TextView
                 android:id="@+id/tvDirectorDetailMovie"
-                android:layout_width="match_parent"
+                android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:text="@string/name"
                 android:textColor="@color/white"
-                android:textSize="@dimen/material_text_subhead"/>
+                android:textSize="@dimen/material_text_subhead"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toTopOf="parent"/>
 
             <TextView
                 android:id="@+id/tvJobDirector"
-                android:layout_width="match_parent"
+                android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:text="@string/job"
                 android:textColor="@color/white"
                 android:textSize="@dimen/material_text_caption"
-                android:layout_marginBottom="8dp"/>
+                android:layout_marginBottom="8dp"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/tvDirectorDetailMovie"/>
 
             <TextView
                 android:id="@+id/tvFeatureCrewDetailMovie"
@@ -237,7 +245,10 @@
                 android:layout_height="wrap_content"
                 android:text="@string/name"
                 android:textColor="@color/white"
-                android:textSize="@dimen/material_text_subhead"/>
+                android:textSize="@dimen/material_text_subhead"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/tvJobDirector"/>
 
             <TextView
                 android:id="@+id/tvJobFeatureCrewDetailMovie"
@@ -245,9 +256,12 @@
                 android:layout_height="wrap_content"
                 android:text="@string/job"
                 android:textColor="@color/white"
-                android:textSize="@dimen/material_text_caption" />
+                android:textSize="@dimen/material_text_caption"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/tvFeatureCrewDetailMovie"/>
 
-        </LinearLayout>
+        </androidx.constraintlayout.widget.ConstraintLayout>
 
         <TextView
             android:id="@+id/tvGenre"
